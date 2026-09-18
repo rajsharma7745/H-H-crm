@@ -16,7 +16,11 @@ export default function UnauthorizedPage() {
         Your account role doesn&apos;t include permission to view this. If you think that&apos;s
         wrong, ask an administrator to update your access.
       </p>
-      <Button className="mt-2" render={<Link href="/dashboard">Back to dashboard</Link>} />
+      <Button
+        className="mt-2"
+        nativeButton={false}
+        render={<Link href="/dashboard">Back to dashboard</Link>}
+      />
     </div>
   );
 }

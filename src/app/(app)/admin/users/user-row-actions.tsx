@@ -49,6 +49,7 @@ export function UserRowActions({
   isSelf: boolean;
 }) {
   const [confirmOpen, setConfirmOpen] = useState(false);
+  const [editOpen, setEditOpen] = useState(false);
 
   async function handleDeactivate() {
     const formData = new FormData();
@@ -87,31 +88,29 @@ export function UserRowActions({
         />
         <DropdownMenuContent align="end">
           {canUpdate && (
-            <UserDialog
-              roles={roles}
-              user={user}
-              trigger={
-                <DropdownMenuItem onSelect={(e) => e.preventDefault()}>
-                  <Pencil className="size-4" />
-                  Edit
-                </DropdownMenuItem>
-              }
-            />
+            <DropdownMenuItem onClick={() => setEditOpen(true)}>
+              <Pencil className="size-4" />
+              Edit
+            </DropdownMenuItem>
           )}
           {canDeactivate && user.status === "ACTIVE" && !isSelf && (
-            <DropdownMenuItem variant="destructive" onSelect={() => setConfirmOpen(true)}>
+            <DropdownMenuItem variant="destructive" onClick={() => setConfirmOpen(true)}>
               <UserX className="size-4" />
               Deactivate
             </DropdownMenuItem>
           )}
           {canUpdate && user.status === "INACTIVE" && (
-            <DropdownMenuItem onSelect={handleActivate}>
+            <DropdownMenuItem onClick={handleActivate}>
               <UserCheck className="size-4" />
               Reactivate
             </DropdownMenuItem>
           )}
         </DropdownMenuContent>
       </DropdownMenu>
+
+      {canUpdate && (
+        <UserDialog roles={roles} user={user} open={editOpen} onOpenChange={setEditOpen} />
+      )}
 
       <AlertDialog open={confirmOpen} onOpenChange={setConfirmOpen}>
         <AlertDialogContent>

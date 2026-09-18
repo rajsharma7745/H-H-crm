@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -45,12 +46,14 @@ export function UserMenu({
         <ChevronsUpDown className="size-3.5 text-muted-foreground" />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="start" className="w-56">
-        <DropdownMenuLabel className="flex items-center justify-between font-normal">
-          <span className="text-xs text-muted-foreground">Signed in as</span>
-          <Badge variant="secondary" className="text-[10px]">
-            {user.role.name}
-          </Badge>
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel className="flex items-center justify-between font-normal">
+            <span className="text-xs text-muted-foreground">Signed in as</span>
+            <Badge variant="secondary" className="text-[10px]">
+              {user.role.name}
+            </Badge>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem
           render={
@@ -64,6 +67,7 @@ export function UserMenu({
         <form action={logoutAction} className="contents">
           <DropdownMenuItem
             variant="destructive"
+            nativeButton
             render={
               <button type="submit" className="w-full text-left">
                 <LogOut className="size-4" />

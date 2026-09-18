@@ -32,6 +32,7 @@ export default async function AdminUsersPage({
   const canCreate = userHasPermission(currentUser, "users.create");
   const canUpdate = userHasPermission(currentUser, "users.update");
   const canDeactivate = userHasPermission(currentUser, "users.delete");
+  const isSuperAdmin = currentUser.role.key === "SUPER_ADMIN";
 
   const where: Prisma.UserWhereInput = {
     ...(role ? { roleId: role } : {}),
@@ -56,6 +57,10 @@ export default async function AdminUsersPage({
     db.role.findMany({ orderBy: { name: "asc" } }),
   ]);
 
+  // Non-Super-Admins can't grant Super Admin access (also enforced server-side
+  // in updateUserAction) — keep it out of the picker entirely.
+  const assignableRoles = isSuperAdmin ? roles : roles.filter((r) => r.key !== "SUPER_ADMIN");
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
@@ -67,7 +72,7 @@ export default async function AdminUsersPage({
         </div>
         {canCreate && (
           <UserDialog
-            roles={roles}
+            roles={assignableRoles}
             trigger={
               <Button>
                 <UserPlus className="size-4" />
@@ -137,9 +142,13 @@ export default async function AdminUsersPage({
                   <TableCell>
                     <UserRowActions
                       user={user}
-                      roles={roles}
-                      canUpdate={canUpdate}
-                      canDeactivate={canDeactivate}
+                      roles={assignableRoles}
+                      canUpdate={
+                        canUpdate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")
+                      }
+                      canDeactivate={
+                        canDeactivate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")
+                      }
                       isSelf={user.id === currentUser.id}
                     />
                   </TableCell>

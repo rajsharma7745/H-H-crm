@@ -43,13 +43,25 @@ export function UserDialog({
   roles,
   user,
   trigger,
+  open: openProp,
+  onOpenChange: onOpenChangeProp,
 }: {
   roles: Role[];
   user?: EditableUser;
-  trigger: React.ReactElement;
+  /** Uncontrolled usage (e.g. the "Create user" button): renders its own trigger. */
+  trigger?: React.ReactElement;
+  /** Controlled usage (e.g. opened from a dropdown menu item): omit `trigger`
+   * and drive `open`/`onOpenChange` externally instead. Nesting a Dialog
+   * trigger directly inside a Menu Item breaks the menu item's own internal
+   * ref/role registration in Base UI, so row actions must use this mode. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }) {
   const isEdit = Boolean(user);
-  const [open, setOpen] = useState(false);
+  const isControlled = openProp !== undefined;
+  const [internalOpen, setInternalOpen] = useState(false);
+  const open = isControlled ? openProp : internalOpen;
+  const setOpen = isControlled ? onOpenChangeProp! : setInternalOpen;
   const [state, formAction] = useActionState<ActionState, FormData>(
     async (prevState, formData) => {
       const result = await (isEdit ? updateUserAction : createUserAction)(prevState, formData);
@@ -64,7 +76,7 @@ export function UserDialog({
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger render={trigger} />
+      {trigger && <DialogTrigger render={trigger} />}
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle>{isEdit ? "Edit user" : "Create user"}</DialogTitle>

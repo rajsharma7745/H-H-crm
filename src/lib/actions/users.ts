@@ -91,6 +91,18 @@ export async function updateUserAction(
   const newRole = await db.role.findUnique({ where: { id: roleId } });
   if (!newRole) return { error: "Selected role does not exist." };
 
+  // Privilege-escalation guard: `users.update` (granted to Manager) is meant
+  // for ordinary team management, not for minting new admins or editing the
+  // admin account itself. Only a Super Admin may do either.
+  if (admin.role.key !== "SUPER_ADMIN") {
+    if (newRole.key === "SUPER_ADMIN") {
+      return { error: "Only a Super Admin can grant Super Admin access." };
+    }
+    if (existing.role.key === "SUPER_ADMIN") {
+      return { error: "Only a Super Admin can edit another Super Admin's account." };
+    }
+  }
+
   const roleChanged = existing.roleId !== roleId;
 
   await db.user.update({
