@@ -37,6 +37,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# generated deliverables/exports that don't belong in app source (e.g. spec docx)
+*.docx
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
