@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: hhcrm
+      POSTGRES_PASSWORD: hhcrm_dev_password
+      POSTGRES_DB: hhcrm
+    ports:
+      - "5432:5432"
+    volumes:
+      - hhcrm_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  hhcrm_postgres_data:

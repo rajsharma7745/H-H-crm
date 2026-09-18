@@ -1,0 +1,180 @@
+// H&H CRM — Phase 1 database schema
+// Authentication, RBAC and audit foundation only.
+// Future modules (Clients, Leads, Tasks, Time, Files, etc.) will add their own
+// models and reference User via foreign key — do not add them here.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// RBAC
+// ---------------------------------------------------------------------------
+
+/// A role is a named bundle of permissions. Stored as data (not a hardcoded
+/// enum) so new roles can be introduced later via seed/admin tooling without
+/// a schema migration.
+model Role {
+  id          String   @id @default(cuid())
+  /// Stable machine key, e.g. "SUPER_ADMIN". Never shown to users directly.
+  key         String   @unique
+  name        String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       User[]
+  permissions RolePermission[]
+}
+
+/// A single grantable capability, e.g. "users.view" or "clients.create".
+/// Future modules add rows here (via migration/seed) — the auth system
+/// itself never needs to change to support a new permission key.
+model Permission {
+  id          String   @id @default(cuid())
+  /// "<module>.<action>", e.g. "users.view"
+  key         String   @unique
+  module      String
+  action      String
+  description String?
+  createdAt   DateTime @default(now())
+
+  roles RolePermission[]
+
+  @@index([module])
+}
+
+/// Join table: which permissions a role grants.
+model RolePermission {
+  id           String @id @default(cuid())
+  roleId       String
+  permissionId String
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId])
+  @@index([permissionId])
+}
+
+// ---------------------------------------------------------------------------
+// Users
+// ---------------------------------------------------------------------------
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+}
+
+model User {
+  id              String     @id @default(cuid())
+  firstName       String
+  lastName        String
+  email           String     @unique
+  /// bcrypt hash — the plaintext password is never persisted or logged.
+  passwordHash    String
+  roleId          String
+  profileImageUrl String?
+  phone           String?
+  jobTitle        String?
+  status          UserStatus @default(ACTIVE)
+  lastLoginAt     DateTime?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  role Role @relation(fields: [roleId], references: [id], onDelete: Restrict)
+
+  sessions            Session[]
+  passwordResetTokens PasswordResetToken[]
+  auditLogsAsActor    AuditLog[]           @relation("AuditActor")
+  auditLogsAsTarget   AuditLog[]           @relation("AuditTarget")
+
+  @@index([roleId])
+  @@index([status])
+}
+
+// ---------------------------------------------------------------------------
+// Sessions (database-backed so logout / expiry are real, not just client-side)
+// ---------------------------------------------------------------------------
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  /// SHA-256 hash of the random session token stored in the httpOnly cookie.
+  /// The raw token is never persisted — only its hash, so a DB leak alone
+  /// cannot be used to forge sessions.
+  tokenHash String   @unique
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+  expiresAt DateTime
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ---------------------------------------------------------------------------
+// Password reset
+// ---------------------------------------------------------------------------
+
+model PasswordResetToken {
+  id        String    @id @default(cuid())
+  userId    String
+  /// SHA-256 hash of the token embedded in the reset link. Raw token is
+  /// never stored, mirroring Session's handling.
+  tokenHash String    @unique
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+}
+
+// ---------------------------------------------------------------------------
+// Audit foundation (Phase 1 scope: auth/security events only)
+// ---------------------------------------------------------------------------
+
+enum AuditAction {
+  USER_CREATED
+  USER_UPDATED
+  USER_ACTIVATED
+  USER_DEACTIVATED
+  USER_ROLE_CHANGED
+  LOGIN_SUCCESS
+  LOGIN_FAILED
+  LOGOUT
+  PASSWORD_CHANGED
+  PASSWORD_RESET_REQUESTED
+  PASSWORD_RESET_COMPLETED
+}
+
+model AuditLog {
+  id        String      @id @default(cuid())
+  action    AuditAction
+  /// Who performed the action. Null when the actor can't be identified yet
+  /// (e.g. a failed login against an email with no matching account).
+  actorId   String?
+  /// The user record the action was performed on, when different from the
+  /// actor (e.g. an admin deactivating someone else).
+  targetId  String?
+  metadata  Json?
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime    @default(now())
+
+  actor  User? @relation("AuditActor", fields: [actorId], references: [id], onDelete: SetNull)
+  target User? @relation("AuditTarget", fields: [targetId], references: [id], onDelete: SetNull)
+
+  @@index([actorId])
+  @@index([targetId])
+  @@index([action])
+  @@index([createdAt])
+}
