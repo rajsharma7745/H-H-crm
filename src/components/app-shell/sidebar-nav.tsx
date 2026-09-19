@@ -2,25 +2,67 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Users2 } from "lucide-react";
+import {
+  LayoutDashboard,
+  Building2,
+  Target,
+  ListChecks,
+  CalendarDays,
+  Clock,
+  UsersRound,
+  BarChart3,
+  Users2,
+  Settings as SettingsIcon,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Badge } from "@/components/ui/badge";
+import type { NavIconKey, NavItemDef } from "@/lib/navigation";
 
-export type NavItem = { href: string; label: string; icon: "dashboard" | "users" };
+const ICONS: Record<NavIconKey, LucideIcon> = {
+  dashboard: LayoutDashboard,
+  clients: Building2,
+  leads: Target,
+  tasks: ListChecks,
+  calendar: CalendarDays,
+  time: Clock,
+  employees: UsersRound,
+  reports: BarChart3,
+  users: Users2,
+  settings: SettingsIcon,
+};
 
-const ICONS = { dashboard: LayoutDashboard, users: Users2 } as const;
-
-export function SidebarNav({ items }: { items: NavItem[] }) {
+export function SidebarNav({ items, onNavigate }: { items: NavItemDef[]; onNavigate?: () => void }) {
   const pathname = usePathname();
 
   return (
     <nav className="grid gap-1 px-3">
       {items.map((item) => {
         const Icon = ICONS[item.icon];
+
+        if (item.status === "soon") {
+          return (
+            <div
+              key={item.key}
+              aria-disabled="true"
+              title={`${item.label} — coming soon`}
+              className="flex cursor-not-allowed items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground/60"
+            >
+              <Icon className="size-4" />
+              <span className="flex-1 truncate">{item.label}</span>
+              <Badge variant="outline" className="shrink-0 text-[10px] font-normal text-muted-foreground/70">
+                Soon
+              </Badge>
+            </div>
+          );
+        }
+
         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
         return (
           <Link
-            key={item.href}
+            key={item.key}
             href={item.href}
+            onClick={onNavigate}
             className={cn(
               "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
               active

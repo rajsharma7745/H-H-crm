@@ -1,7 +1,8 @@
-// H&H CRM — Phase 1 database schema
-// Authentication, RBAC and audit foundation only.
-// Future modules (Clients, Leads, Tasks, Time, Files, etc.) will add their own
-// models and reference User via foreign key — do not add them here.
+// H&H CRM database schema
+// Phase 1: authentication, RBAC and audit foundation.
+// Phase 3: Client Management.
+// Future modules (Leads, Tasks, Time, Files, etc.) will add their own models
+// and reference User via foreign key — do not add them here.
 
 generator client {
   provider = "prisma-client-js"
@@ -92,6 +93,7 @@ model User {
   passwordResetTokens PasswordResetToken[]
   auditLogsAsActor    AuditLog[]           @relation("AuditActor")
   auditLogsAsTarget   AuditLog[]           @relation("AuditTarget")
+  clientsOwned        Client[]             @relation("ClientOwner")
 
   @@index([roleId])
   @@index([status])
@@ -139,7 +141,55 @@ model PasswordResetToken {
 }
 
 // ---------------------------------------------------------------------------
-// Audit foundation (Phase 1 scope: auth/security events only)
+// Clients (Phase 3)
+// ---------------------------------------------------------------------------
+
+/// Mirrors the B2B/B2C distinction already used for Leads (master spec
+/// Section 4), carried onto Client so a converted lead keeps its type.
+enum ClientType {
+  B2B
+  B2C
+}
+
+/// Client lifecycle per the master spec's Client entity (Section 4) — not to
+/// be confused with a Lead's pipeline stage. PROSPECT = not yet onboarded,
+/// PAUSED = temporarily inactive, CHURNED = relationship ended.
+enum ClientStatus {
+  PROSPECT
+  ACTIVE
+  PAUSED
+  CHURNED
+}
+
+model Client {
+  id                   String       @id @default(cuid())
+  name                 String
+  clientType           ClientType   @default(B2B)
+  status               ClientStatus @default(PROSPECT)
+  primaryContactName   String?
+  primaryContactEmail  String?
+  primaryContactPhone  String?
+  website              String?
+  industry             String?
+  address              String?
+  notes                String?
+  /// Account manager / owning employee. Nullable — a client can exist
+  /// unassigned — and SetNull so the client record survives if its owner's
+  /// account is ever removed.
+  ownerId              String?
+  createdAt            DateTime     @default(now())
+  updatedAt            DateTime     @updatedAt
+
+  owner User? @relation("ClientOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+
+  @@index([ownerId])
+  @@index([status])
+}
+
+// ---------------------------------------------------------------------------
+// Audit foundation (Phase 1: auth/security events. Phase 3 adds Client
+// events — Client has no direct AuditLog relation since targetId is a User
+// foreign key, so client events carry clientId in metadata instead.)
 // ---------------------------------------------------------------------------
 
 enum AuditAction {
@@ -154,6 +204,10 @@ enum AuditAction {
   PASSWORD_CHANGED
   PASSWORD_RESET_REQUESTED
   PASSWORD_RESET_COMPLETED
+  CLIENT_CREATED
+  CLIENT_UPDATED
+  CLIENT_ACTIVATED
+  CLIENT_DEACTIVATED
 }
 
 model AuditLog {

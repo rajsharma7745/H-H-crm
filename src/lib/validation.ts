@@ -66,3 +66,60 @@ export const updateUserSchema = z.object({
   jobTitle: z.string().trim().max(150).optional().or(z.literal("")),
   phone: z.string().trim().max(30).optional().or(z.literal("")),
 });
+
+// ---------------------------------------------------------------------------
+// Clients (Phase 3)
+// ---------------------------------------------------------------------------
+
+const optionalPhoneSchema = z
+  .string()
+  .trim()
+  .max(30)
+  .optional()
+  .or(z.literal(""))
+  .refine((v) => !v || /^[0-9+\-()\s]{7,30}$/.test(v), {
+    message: "Enter a valid phone number.",
+  });
+
+const optionalEmailSchema = z.union([z.literal(""), emailSchema]).optional();
+
+const optionalWebsiteSchema = z
+  .string()
+  .trim()
+  .max(2048)
+  .optional()
+  .or(z.literal(""))
+  .refine((v) => !v || /^https?:\/\/[^\s]+\.[^\s]+$/i.test(v), {
+    message: "Enter a valid website URL, starting with http:// or https://.",
+  });
+
+/** Sentinel value the client form's owner <Select> submits for "no owner
+ * selected" — Base UI Select items can't carry an empty-string value, so the
+ * server action normalizes this back to `null` before writing to the DB. */
+export const UNASSIGNED_OWNER = "__unassigned__";
+
+const clientTypeSchema = z.enum(["B2B", "B2C"], { message: "Select a client type." });
+const clientStatusSchema = z.enum(["PROSPECT", "ACTIVE", "PAUSED", "CHURNED"], {
+  message: "Select a status.",
+});
+
+const clientBaseFields = {
+  name: z.string().trim().min(1, "Client name is required.").max(200),
+  clientType: clientTypeSchema,
+  status: clientStatusSchema,
+  primaryContactName: z.string().trim().max(150).optional().or(z.literal("")),
+  primaryContactEmail: optionalEmailSchema,
+  primaryContactPhone: optionalPhoneSchema,
+  website: optionalWebsiteSchema,
+  industry: z.string().trim().max(100).optional().or(z.literal("")),
+  address: z.string().trim().max(300).optional().or(z.literal("")),
+  notes: z.string().trim().max(5000).optional().or(z.literal("")),
+  ownerId: z.string().trim().optional().or(z.literal("")),
+};
+
+export const createClientSchema = z.object(clientBaseFields);
+
+export const updateClientSchema = z.object({
+  clientId: z.string().min(1),
+  ...clientBaseFields,
+});

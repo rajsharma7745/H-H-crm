@@ -4,15 +4,16 @@ import { useState } from "react";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet";
-import { SidebarNav, type NavItem } from "@/components/app-shell/sidebar-nav";
+import { SidebarNav } from "@/components/app-shell/sidebar-nav";
 import { UserMenu } from "@/components/app-shell/user-menu";
+import type { NavItemDef } from "@/lib/navigation";
 import type { ComponentProps } from "react";
 
 export function MobileNav({
   items,
   user,
 }: {
-  items: NavItem[];
+  items: NavItemDef[];
   user: ComponentProps<typeof UserMenu>["user"];
 }) {
   const [open, setOpen] = useState(false);
@@ -36,9 +37,7 @@ export function MobileNav({
           </SheetTitle>
         </SheetHeader>
         <div className="flex h-[calc(100%-4rem)] flex-col justify-between py-2">
-          <div onClick={() => setOpen(false)}>
-            <SidebarNav items={items} />
-          </div>
+          <SidebarNav items={items} onNavigate={() => setOpen(false)} />
           <div className="border-t p-3">
             <UserMenu user={user} />
           </div>

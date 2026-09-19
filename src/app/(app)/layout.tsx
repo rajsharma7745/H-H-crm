@@ -1,15 +1,16 @@
-import { requireAuth, userHasPermission } from "@/lib/rbac/authorize";
-import { SidebarNav, type NavItem } from "@/components/app-shell/sidebar-nav";
+import { requireAuth } from "@/lib/rbac/authorize";
+import { visibleNavItems } from "@/lib/navigation";
+import type { PermissionKey } from "@/lib/rbac/permissions";
+import { SidebarNav } from "@/components/app-shell/sidebar-nav";
 import { UserMenu } from "@/components/app-shell/user-menu";
 import { MobileNav } from "@/components/app-shell/mobile-nav";
+import { Breadcrumbs } from "@/components/app-shell/breadcrumbs";
+import { NotificationsButton } from "@/components/app-shell/notifications-button";
 
 export default async function AppLayout({ children }: { children: React.ReactNode }) {
   const user = await requireAuth();
-
-  const items: NavItem[] = [{ href: "/dashboard", label: "Dashboard", icon: "dashboard" }];
-  if (userHasPermission(user, "users.view")) {
-    items.push({ href: "/admin/users", label: "Users", icon: "users" });
-  }
+  const granted = new Set(user.role.permissions.map((rp) => rp.permission.key as PermissionKey));
+  const items = visibleNavItems(granted);
 
   return (
     <div className="flex min-h-svh">
@@ -21,7 +22,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
           <span className="text-sm font-semibold tracking-tight">H&H CRM</span>
         </div>
 
-        <div className="flex-1 py-2">
+        <div className="flex-1 overflow-y-auto py-2">
           <SidebarNav items={items} />
         </div>
 
@@ -31,14 +32,23 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex h-16 items-center justify-between border-b px-4 md:hidden">
-          <div className="flex items-center gap-2.5">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-neutral-950 text-xs font-bold text-white">
+        <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b px-4 sm:px-6">
+          <div className="flex min-w-0 items-center gap-2.5">
+            <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-neutral-950 text-xs font-bold text-white md:hidden">
               H&H
             </div>
-            <span className="text-sm font-semibold tracking-tight">H&H CRM</span>
+            <span className="truncate text-sm font-semibold tracking-tight md:hidden">H&H CRM</span>
+            <div className="hidden min-w-0 md:block">
+              <Breadcrumbs items={items} />
+            </div>
           </div>
-          <MobileNav items={items} user={user} />
+
+          <div className="flex shrink-0 items-center gap-1.5">
+            <NotificationsButton />
+            <div className="md:hidden">
+              <MobileNav items={items} user={user} />
+            </div>
+          </div>
         </header>
 
         <main className="flex-1 overflow-y-auto">{children}</main>
