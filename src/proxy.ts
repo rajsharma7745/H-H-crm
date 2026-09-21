@@ -14,7 +14,12 @@ import { NextResponse, type NextRequest } from "next/server";
 const SESSION_COOKIE_NAME = process.env.SESSION_COOKIE_NAME || "hhcrm_session";
 
 const PROTECTED_PREFIXES = ["/dashboard", "/profile", "/admin", "/settings"];
-const AUTH_ONLY_PAGES = ["/login", "/forgot-password", "/reset-password"];
+
+// Note: there is deliberately no "already logged in -> bounce away from
+// /login" rule here. That direction needs a real DB-backed session check
+// (done in src/app/(auth)/layout.tsx via getCurrentUser()) — doing it here
+// off cookie presence alone can loop forever against the redirect below
+// whenever the cookie is stale (expired/deleted session, reset dev DB).
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
@@ -27,13 +32,6 @@ export function proxy(request: NextRequest) {
     const loginUrl = new URL("/login", request.url);
     loginUrl.searchParams.set("next", pathname);
     return NextResponse.redirect(loginUrl);
-  }
-
-  const isAuthOnlyPage = AUTH_ONLY_PAGES.some(
-    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`),
-  );
-  if (isAuthOnlyPage && hasSessionCookie) {
-    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
   return NextResponse.next();
