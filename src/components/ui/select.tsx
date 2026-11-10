@@ -5,7 +5,40 @@ import { Select as SelectPrimitive } from "@base-ui/react/select"
 import { cn } from "cn"
 import { ChevronDownIcon, CheckIcon, ChevronUpIcon } from "lucide-react"
 
-const Select = SelectPrimitive.Root
+/**
+ * Walks the element tree for `<SelectItem>`s and returns their value -> label
+ * pairs. Base UI only shows a label in the closed trigger when the root is
+ * given `items`; otherwise `<SelectValue>` falls back to the raw value (e.g.
+ * "__unassigned__", "30d", "WARM_APPROACH"). Deriving `items` here means every
+ * call site shows its label without repeating the options twice.
+ */
+function collectSelectItems(
+  node: React.ReactNode,
+  out: { value: string; label: React.ReactNode }[]
+) {
+  React.Children.forEach(node, (child) => {
+    if (!React.isValidElement(child)) return
+    const props = child.props as { value?: unknown; children?: React.ReactNode }
+    if (child.type === SelectItem && typeof props.value === "string") {
+      out.push({ value: props.value, label: props.children })
+    } else {
+      collectSelectItems(props.children, out)
+    }
+  })
+}
+
+function Select<Value, Multiple extends boolean | undefined = false>(
+  props: SelectPrimitive.Root.Props<Value, Multiple>
+) {
+  const { items, children } = props
+  const derivedItems = React.useMemo(() => {
+    if (items) return undefined
+    const collected: { value: string; label: React.ReactNode }[] = []
+    collectSelectItems(children, collected)
+    return collected.length > 0 ? collected : undefined
+  }, [items, children])
+  return <SelectPrimitive.Root {...props} items={items ?? derivedItems} />
+}
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (

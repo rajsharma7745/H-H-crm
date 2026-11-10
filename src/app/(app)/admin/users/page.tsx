@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
-import { UserPlus } from "lucide-react";
+import { UserPlus, SearchX, ShieldCheck, ArrowRight } from "lucide-react";
 import { db } from "@/lib/db";
 import { requirePermission, userHasPermission } from "@/lib/rbac/authorize";
 import { Button } from "@/components/ui/button";
@@ -14,12 +15,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Card, CardContent } from "@/components/ui/card";
+import { EmptyPanel } from "@/components/empty-state";
+import { ActiveFilters, type ActiveFilter } from "@/components/active-filters";
+import { FilterBar, PageHeader, PageShell, ResultCount } from "@/components/page-shell";
 import { UserFilters } from "@/app/(app)/admin/users/user-filters";
 import { UserDialog } from "@/app/(app)/admin/users/user-dialog";
 import { UserRowActions } from "@/app/(app)/admin/users/user-row-actions";
+import { formatDate, formatRelative, initialsOf } from "@/lib/format";
 import type { Prisma } from "@prisma/client";
 
-export const metadata: Metadata = { title: "Users" };
+export const metadata: Metadata = { title: "Team" };
 
 export default async function AdminUsersPage({
   searchParams,
@@ -28,10 +34,12 @@ export default async function AdminUsersPage({
 }) {
   const currentUser = await requirePermission("users.view");
   const { q, role, status } = await searchParams;
+  const now = new Date();
 
   const canCreate = userHasPermission(currentUser, "users.create");
   const canUpdate = userHasPermission(currentUser, "users.update");
   const canDeactivate = userHasPermission(currentUser, "users.delete");
+  const canViewSettings = userHasPermission(currentUser, "settings.view");
   const isSuperAdmin = currentUser.role.key === "SUPER_ADMIN";
 
   const where: Prisma.UserWhereInput = {
@@ -48,116 +56,223 @@ export default async function AdminUsersPage({
       : {}),
   };
 
-  const [users, roles] = await Promise.all([
+  const [users, roles, totalUserCount] = await Promise.all([
     db.user.findMany({
       where,
       include: { role: true },
       orderBy: { createdAt: "desc" },
     }),
     db.role.findMany({ orderBy: { name: "asc" } }),
+    db.user.count(),
   ]);
 
   // Non-Super-Admins can't grant Super Admin access (also enforced server-side
   // in updateUserAction) — keep it out of the picker entirely.
   const assignableRoles = isSuperAdmin ? roles : roles.filter((r) => r.key !== "SUPER_ADMIN");
 
+  const chips: ActiveFilter[] = [];
+  if (q) chips.push({ key: "q", label: "Search", display: q });
+  if (role) {
+    const match = roles.find((r) => r.id === role);
+    chips.push({ key: "role", label: "Role", display: match?.name ?? "Selected role" });
+  }
+  if (status === "ACTIVE" || status === "INACTIVE") {
+    chips.push({
+      key: "status",
+      label: "Access",
+      display: status === "ACTIVE" ? "Can sign in" : "Access revoked",
+    });
+  }
+
+  const createButton = (
+    <UserDialog
+      roles={assignableRoles}
+      trigger={
+        <Button>
+          <UserPlus className="size-4" />
+          Add person
+        </Button>
+      }
+    />
+  );
+
   return (
-    <div className="mx-auto max-w-5xl px-4 py-10 sm:px-8">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Users</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Manage who has access to H&H CRM and what they can do.
-          </p>
-        </div>
-        {canCreate && (
-          <UserDialog
-            roles={assignableRoles}
-            trigger={
-              <Button>
-                <UserPlus className="size-4" />
-                Create user
-              </Button>
-            }
-          />
-        )}
-      </div>
-
-      <div className="mt-6">
-        <Suspense fallback={null}>
-          <UserFilters roles={roles} />
-        </Suspense>
-      </div>
-
-      <div className="mt-4 overflow-hidden rounded-lg border">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Role</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead>Last login</TableHead>
-              <TableHead className="w-10" />
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {users.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={5} className="h-24 text-center text-sm text-muted-foreground">
-                  No users match your filters.
-                </TableCell>
-              </TableRow>
+    <PageShell>
+      <PageHeader
+        title="Team"
+        description="Everyone who can sign in to H&H CRM. A person's role decides what they are allowed to see and change."
+        actions={
+          <>
+            {canViewSettings && (
+              <Button
+                variant="outline"
+                nativeButton={false}
+                render={
+                  <Link href="/settings">
+                    <ShieldCheck className="size-4" />
+                    What each role can do
+                  </Link>
+                }
+              />
             )}
-            {users.map((user) => {
-              const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
-              return (
-                <TableRow key={user.id}>
-                  <TableCell>
-                    <div className="flex items-center gap-3">
-                      <Avatar className="size-8">
-                        <AvatarFallback className="text-xs">{initials}</AvatarFallback>
+            {canCreate && createButton}
+          </>
+        }
+      />
+
+      {totalUserCount > 0 && (
+        <FilterBar className="mt-6">
+          <Suspense fallback={null}>
+            <UserFilters roles={roles} />
+          </Suspense>
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <Suspense fallback={null}>
+              <ActiveFilters filters={chips} alsoClear={["q", "role", "status"]} />
+            </Suspense>
+            <ResultCount shown={users.length} total={totalUserCount} noun="person" pluralNoun="people" />
+          </div>
+        </FilterBar>
+      )}
+
+      {users.length === 0 ? (
+        <EmptyPanel
+          className="mt-4"
+          icon={SearchX}
+          title="Nobody matches your filters"
+          description="No team member matches everything you are filtering by. Remove a filter above to see more people."
+        />
+      ) : (
+        <>
+          {/* Desktop / tablet: table */}
+          <div className="mt-4 hidden overflow-hidden rounded-xl border bg-card shadow-xs md:block">
+            <Table>
+              <TableHeader>
+                <TableRow className="bg-muted/50 hover:bg-muted/50">
+                  <TableHead className="py-2.5 pl-4 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Person
+                  </TableHead>
+                  <TableHead className="py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Role
+                  </TableHead>
+                  <TableHead className="py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Access
+                  </TableHead>
+                  <TableHead className="py-2.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
+                    Last signed in
+                  </TableHead>
+                  <TableHead className="w-12 py-2.5 pr-3">
+                    <span className="sr-only">Actions</span>
+                  </TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {users.map((user) => (
+                  <TableRow key={user.id}>
+                    <TableCell className="py-3 pl-4">
+                      <div className="flex items-center gap-3">
+                        <Avatar className="size-8">
+                          <AvatarFallback className="text-xs">
+                            {initialsOf(user.firstName, user.lastName)}
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium">
+                            {user.firstName} {user.lastName}
+                            {user.id === currentUser.id && (
+                              <span className="ml-1.5 text-xs font-normal text-muted-foreground">(you)</span>
+                            )}
+                          </p>
+                          <p className="truncate text-xs text-muted-foreground">{user.email}</p>
+                        </div>
+                      </div>
+                    </TableCell>
+                    <TableCell className="py-3">
+                      <Badge variant="secondary">{user.role.name}</Badge>
+                    </TableCell>
+                    <TableCell className="py-3">
+                      <Badge variant={user.status === "ACTIVE" ? "success" : "outline"}>
+                        {user.status === "ACTIVE" ? "Can sign in" : "Revoked"}
+                      </Badge>
+                    </TableCell>
+                    <TableCell className="py-3 text-sm text-muted-foreground">
+                      {user.lastLoginAt ? (
+                        <span title={formatDate(user.lastLoginAt)}>{formatRelative(user.lastLoginAt, now)}</span>
+                      ) : (
+                        "Never"
+                      )}
+                    </TableCell>
+                    <TableCell className="py-3 pr-3">
+                      <UserRowActions
+                        user={user}
+                        roles={assignableRoles}
+                        canUpdate={canUpdate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")}
+                        canDeactivate={canDeactivate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")}
+                        isSelf={user.id === currentUser.id}
+                      />
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </div>
+
+          {/* Mobile: stacked cards, so nothing needs horizontal scrolling */}
+          <div className="mt-4 grid gap-3 md:hidden">
+            {users.map((user) => (
+              <Card key={user.id} size="sm">
+                <CardContent className="flex flex-col gap-3">
+                  <div className="flex items-start justify-between gap-2">
+                    <div className="flex min-w-0 items-center gap-3">
+                      <Avatar className="size-9">
+                        <AvatarFallback className="text-xs">
+                          {initialsOf(user.firstName, user.lastName)}
+                        </AvatarFallback>
                       </Avatar>
                       <div className="min-w-0">
                         <p className="truncate text-sm font-medium">
                           {user.firstName} {user.lastName}
                           {user.id === currentUser.id && (
-                            <span className="ml-1.5 text-xs text-muted-foreground">(you)</span>
+                            <span className="ml-1.5 text-xs font-normal text-muted-foreground">(you)</span>
                           )}
                         </p>
                         <p className="truncate text-xs text-muted-foreground">{user.email}</p>
                       </div>
                     </div>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant="secondary">{user.role.name}</Badge>
-                  </TableCell>
-                  <TableCell>
-                    <Badge variant={user.status === "ACTIVE" ? "default" : "outline"}>
-                      {user.status === "ACTIVE" ? "Active" : "Inactive"}
-                    </Badge>
-                  </TableCell>
-                  <TableCell className="text-sm text-muted-foreground">
-                    {user.lastLoginAt ? new Date(user.lastLoginAt).toLocaleDateString() : "Never"}
-                  </TableCell>
-                  <TableCell>
                     <UserRowActions
                       user={user}
                       roles={assignableRoles}
-                      canUpdate={
-                        canUpdate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")
-                      }
-                      canDeactivate={
-                        canDeactivate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")
-                      }
+                      canUpdate={canUpdate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")}
+                      canDeactivate={canDeactivate && (isSuperAdmin || user.role.key !== "SUPER_ADMIN")}
                       isSelf={user.id === currentUser.id}
                     />
-                  </TableCell>
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
-      </div>
-    </div>
+                  </div>
+
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    <Badge variant="secondary">{user.role.name}</Badge>
+                    <Badge variant={user.status === "ACTIVE" ? "success" : "outline"}>
+                      {user.status === "ACTIVE" ? "Can sign in" : "Revoked"}
+                    </Badge>
+                  </div>
+
+                  <p className="text-xs text-muted-foreground">
+                    Last signed in {user.lastLoginAt ? formatRelative(user.lastLoginAt, now) : "never"}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </>
+      )}
+
+      {canViewSettings && (
+        <Link
+          href="/settings"
+          className="mt-6 inline-flex items-center gap-1 rounded-md text-xs font-medium text-primary hover:underline"
+        >
+          See the full permission matrix in Settings
+          <ArrowRight className="size-3" aria-hidden="true" />
+        </Link>
+      )}
+    </PageShell>
   );
 }

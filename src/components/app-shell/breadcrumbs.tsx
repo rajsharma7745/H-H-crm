@@ -23,7 +23,10 @@ export function Breadcrumbs({ items }: { items: NavItemDef[] }) {
                   {crumb.label}
                 </Link>
               ) : (
-                <span className={cn("truncate", isLast ? "font-medium text-foreground" : "text-muted-foreground")}>
+                <span
+                  aria-current={isLast ? "page" : undefined}
+                  className={cn("truncate", isLast ? "font-semibold text-foreground" : "text-muted-foreground")}
+                >
                   {crumb.label}
                 </span>
               )}

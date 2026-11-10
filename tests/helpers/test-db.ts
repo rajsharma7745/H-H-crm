@@ -12,7 +12,7 @@ import {
 /** Clears everything except the Role/Permission/RolePermission seed, which is stable for the whole run. */
 export async function truncateDynamicTables(): Promise<void> {
   await db.$executeRawUnsafe(
-    `TRUNCATE TABLE "AuditLog", "PasswordResetToken", "Session", "User", "Client" RESTART IDENTITY CASCADE;`,
+    `TRUNCATE TABLE "AuditLog", "PasswordResetToken", "Session", "User", "Client", "FollowUp", "LeadActivity", "Lead" RESTART IDENTITY CASCADE;`,
   );
 }
 

@@ -1,0 +1,3479 @@
+▲ Next.js 16.3.5 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.20.127:3000
+- Environments: .env
+✓ Ready in 2.5s
+✓ Running next.config.ts took 280ms
+
+ GET /login 200 in 5.5s (next.js: 4.1s, proxy.ts: 548ms, application-code: 885ms)
+ GET / 307 in 1870ms (next.js: 432ms, proxy.ts: 118ms, application-code: 1320ms)
+ GET /login 200 in 269ms (next.js: 93ms, proxy.ts: 17ms, application-code: 159ms)
+ GET /leads 307 in 1162ms (next.js: 490ms, proxy.ts: 18ms, application-code: 654ms)
+ POST /login 303 in 998ms (next.js: 26ms, proxy.ts: 29ms, application-code: 943ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HotReload globalError={[...]} webSocket={WebSocket} staticIndicatorState={{pathname:null, ...}}>
+      <AppDevOverlayErrorBoundary globalError={[...]}>
+        <ReplaySsrOnlyErrors>
+        <DevRootHTTPAccessFallbackBoundary>
+          <HTTPAccessFallbackBoundary notFound={<NotAllowedRootHTTPFallbackError>}>
+            <HTTPAccessFallbackErrorBoundary pathname="/dashboard" notFound={<NotAllowedRootHTTPFallbackError>} ...>
+              <RedirectBoundary>
+                <RedirectErrorBoundary router={{...}}>
+                  <Head>
+                  <__next_root_layout_boundary__>
+                    <SegmentViewNode type="layout" pagePath="layout.tsx">
+                      <SegmentTrieNode>
+                      <link>
+                      <script>
+                      <script>
+                      <RootLayout>
+                        <html lang="en" className="geist_a715...">
+                          <body
+                            className="min-h-full flex flex-col bg-background text-foreground"
+-                           __processed_e52a6481-9f44-4232-a2b8-3e5ca59ed403__="true"
+                          >
+                  ...
+ 
+ GET /dashboard 200 in 3.2s (next.js: 278ms, proxy.ts: 16ms, application-code: 2.9s)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <RenderFromTemplateContext>
+      <ScrollAndMaybeFocusHandler cacheNode={{rsc:{...}, ...}}>
+        <InnerScrollHandlerNew focusAndScrollRef={{scrollRef:null, ...}} cacheNode={{rsc:{...}, ...}}>
+          <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+            <LoadingBoundary name="dashboard/" loading={[...]}>
+              <Suspense name="dashboard/" fallback={<Fragment>}>
+                <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+                  <RedirectBoundary>
+                    <RedirectErrorBoundary router={{...}}>
+                      <InnerLayoutRouter url="/dashboard" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} ...>
+                        <SegmentViewNode type="page" pagePath="(app)/dash...">
+                          <SegmentTrieNode>
+                          <DashboardPage>
+                            <PageShell>
+                              <div
+                                className="mx-auto w-full px-4 py-6 sm:px-6 sm:py-8 lg:px-8 max-w-6xl"
+-                               bis_skin_checked="1"
+                              >
+                                <PageHeader>
+                                  <div
+                                    className="flex flex-col gap-4"
+-                                   bis_skin_checked="1"
+                                  >
+                                    <div
+                                      className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+                                        className="min-w-0 space-y-1.5"
+-                                       bis_skin_checked="1"
+                                      >
+                                      <div
+                                        className="flex shrink-0 flex-wrap items-center gap-2"
+-                                       bis_skin_checked="1"
+                                      >
+                                <div
+                                  className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
+-                                 bis_skin_checked="1"
+                                >
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                  <StatCard>
+                                    <Card>
+                                      <div
+                                        data-slot="card"
+                                        data-size="sm"
+                                        className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden rou..."}
+-                                       bis_skin_checked="1"
+                                      >
+                                        <CardContent>
+                                          <div
+                                            data-slot="card-content"
+                                            className="px-(--card-spacing) flex items-start justify-between gap-3"
+-                                           bis_skin_checked="1"
+                                          >
+                                            <div
+                                              className="min-w-0 space-y-1"
+-                                             bis_skin_checked="1"
+                                            >
+                                            ...
+                                <Separator className="my-8">
+                                  <SeparatorComponent data-slot="separator" orientation="horizontal" ...>
+                                    <div
+                                      data-orientation="horizontal"
+                                      role="separator"
+                                      aria-orientation="horizontal"
+                                      data-slot="separator"
+                                      ref={null}
+                                      className="shrink-0 bg-border data-horizontal:h-px data-horizontal:w-full data-v..."
+-                                     bis_skin_checked="1"
+                                    >
+                                <PageSection>
+                                  <section className="space-y-3">
+                                    <div
+                                      className="flex flex-wrap items-end justify-between gap-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                    <div
+                                      className="grid gap-4 lg:grid-cols-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Open follow-ups whose due time has already passed.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing) space-y-3"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <EmptyState>
+                                                <div
+                                                  className="flex flex-col items-center justify-center text-center gap..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center justify-center rounded-full bg-muted ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              ...
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Open follow-ups due after today.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing) space-y-3"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <EmptyState>
+                                                <div
+                                                  className="flex flex-col items-center justify-center text-center gap..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center justify-center rounded-full bg-muted ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                              ...
+                                <PageSection>
+                                  <section className="space-y-3 ...">
+                                    <div
+                                      className="flex flex-wrap items-end justify-between gap-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                    <div
+                                      className="grid gap-4 lg:grid-cols-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 By pipeline
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 How new leads split between the two ways they reach you.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing)"
+-                                             bis_skin_checked="1"
+                                            >
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 By stage
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Which stage each of those leads is in today.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing)"
+-                                             bis_skin_checked="1"
+                                            >
+                                <PageSection>
+                                  <section className="space-y-3 ...">
+                                    <div
+                                      className="flex flex-wrap items-end justify-between gap-2"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <div
+-                                       bis_skin_checked="1"
+                                      >
+                                    <div
+                                      className="grid gap-4 lg:grid-cols-3"
+-                                     bis_skin_checked="1"
+                                    >
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Newest first, within the selected period.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing)"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <EmptyState>
+                                                <div
+                                                  className="flex flex-col items-center justify-center text-center gap..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center justify-center rounded-full bg-muted ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  <p>
+                                                  <p>
+                                                  <div
+                                                    className="mt-2 flex flex-wrap items-center justify-center gap-2"
+-                                                   bis_skin_checked="1"
+                                                  >
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Calls, notes, meetings and emails your team recorded.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing)"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <EmptyState>
+                                                <div
+                                                  className="flex flex-col items-center justify-center text-center gap..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center justify-center rounded-full bg-muted ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                                      <Card>
+                                        <div
+                                          data-slot="card"
+                                          data-size="default"
+                                          className={"group/card flex flex-col gap-(--card-spacing) overflow-hidden r..."}
+-                                         bis_skin_checked="1"
+                                        >
+                                          <CardHeader>
+                                            <div
+                                              data-slot="card-header"
+                                              className="group/card-header @container/card-header grid auto-rows-min i..."
+-                                             bis_skin_checked="1"
+                                            >
+                                              <CardTitle>
+                                                <div
+                                                  data-slot="card-title"
+                                                  className="font-heading text-base leading-snug font-medium group-dat..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                              <CardDescription>
+                                                <div
+                                                  data-slot="card-description"
+                                                  className="text-sm text-muted-foreground"
+-                                                 bis_skin_checked="1"
+                                                >
++                                                 Leads that moved forward or back in a pipeline.
+                                          <CardContent>
+                                            <div
+                                              data-slot="card-content"
+                                              className="px-(--card-spacing)"
+-                                             bis_skin_checked="1"
+                                            >
+                                              <EmptyState>
+                                                <div
+                                                  className="flex flex-col items-center justify-center text-center gap..."
+-                                                 bis_skin_checked="1"
+                                                >
+                                                  <div
+                                                    className="flex items-center justify-center rounded-full bg-muted ..."
+-                                                   bis_skin_checked="1"
+                                                  >
+                                                  ...
+                        ...
+                      ...
+          ...
+ 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+      <RedirectBoundary>
+        <RedirectErrorBoundary router={{...}}>
+          <InnerLayoutRouter url="/dashboard" tree={[...]} params={{}} cacheNode={{rsc:{...}, ...}} segmentPath={[...]} ...>
+            <SegmentViewNode type="page" pagePath="(app)/dash...">
+              <SegmentTrieNode>
+              <DashboardPage>
+                <PageShell>
+                  <div className="mx-auto w-...">
+                    <PageHeader>
+                      <div className="flex flex-...">
+                        <div className="flex flex-...">
+                          <div>
+                          <div className="flex shrin...">
+                            <Suspense fallback={null}>
+                              <DateRangeFilter>
+                                <div
+                                  className="flex flex-col gap-3 sm:flex-row sm:items-end"
+-                                 bis_skin_checked="1"
+                                >
+                                  <div
+                                    className="grid gap-1.5"
+-                                   bis_skin_checked="1"
+                                  >
+                    ...
+            ...
+          ...
+ 
+ GET /leads 200 in 466ms (next.js: 17ms, proxy.ts: 14ms, application-code: 436ms)
+ GET /dashboard 200 in 780ms (next.js: 8ms, proxy.ts: 6ms, application-code: 766ms)
+ GET /reports 200 in 1384ms (next.js: 95ms, proxy.ts: 8ms, application-code: 1282ms)
+ GET /dashboard 200 in 955ms (next.js: 17ms, proxy.ts: 20ms, application-code: 917ms)
+ GET /login?next=%2Fdashboard 200 in 870ms (next.js: 401ms, proxy.ts: 18ms, application-code: 452ms)
+ GET /login 200 in 147ms (next.js: 15ms, proxy.ts: 12ms, application-code: 120ms)
+ GET /login 200 in 130ms (next.js: 15ms, proxy.ts: 7ms, application-code: 109ms)
+ GET /dashboard 200 in 1057ms (next.js: 14ms, proxy.ts: 7ms, application-code: 1037ms)
+ POST /login 200 in 1769ms (next.js: 33ms, proxy.ts: 18ms, application-code: 1718ms)
+  └─ ƒ loginAction(undefined, {}) in 599ms src/lib/actions/auth.ts
+ GET /dashboard 200 in 1422ms (next.js: 53ms, proxy.ts: 14ms, application-code: 1355ms)
+ GET /leads/ads 200 in 670ms (next.js: 199ms, proxy.ts: 9ms, application-code: 463ms)
+ GET /leads/warm-approach 200 in 477ms (next.js: 85ms, proxy.ts: 10ms, application-code: 382ms)
+ GET /leads 200 in 514ms (next.js: 16ms, proxy.ts: 10ms, application-code: 488ms)
+ GET /follow-ups 200 in 791ms (next.js: 274ms, proxy.ts: 10ms, application-code: 507ms)
+ GET /reports 200 in 526ms (next.js: 19ms, proxy.ts: 13ms, application-code: 495ms)
+ GET /admin/users 200 in 534ms (next.js: 98ms, proxy.ts: 9ms, application-code: 428ms)
+ GET /admin/users 200 in 41ms (next.js: 25ms, proxy.ts: 4ms, application-code: 12ms)
+ GET /settings 200 in 1199ms (next.js: 126ms, proxy.ts: 15ms, application-code: 1057ms)
+ GET /profile 200 in 687ms (next.js: 227ms, proxy.ts: 15ms, application-code: 446ms)
+ GET /clients 200 in 3.5s (next.js: 2.5s, proxy.ts: 18ms, application-code: 1049ms)
+ GET /clients 200 in 95ms (next.js: 14ms, proxy.ts: 18ms, application-code: 63ms)
+ GET /login 200 in 390ms (next.js: 193ms, proxy.ts: 29ms, application-code: 169ms)
+ GET /dashboard 200 in 1747ms (next.js: 68ms, proxy.ts: 13ms, application-code: 1666ms)
+ POST /login 200 in 2.8s (next.js: 38ms, proxy.ts: 25ms, application-code: 2.8s)
+  └─ ƒ loginAction(undefined, {}) in 932ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 1364ms (next.js: 172ms, proxy.ts: 30ms, application-code: 1161ms)
+✓ Compiled in 1515ms
+ GET /dashboard 200 in 1274ms (next.js: 108ms, proxy.ts: 71ms, application-code: 1094ms)
+ GET /login 200 in 410ms (next.js: 134ms, proxy.ts: 26ms, application-code: 250ms)
+ GET /dashboard 200 in 1152ms (next.js: 79ms, proxy.ts: 9ms, application-code: 1063ms)
+ POST /login 200 in 1870ms (next.js: 15ms, proxy.ts: 15ms, application-code: 1840ms)
+  └─ ƒ loginAction(undefined, {}) in 635ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 461ms (next.js: 84ms, proxy.ts: 11ms, application-code: 366ms)
+ GET /login 200 in 172ms (next.js: 19ms, proxy.ts: 12ms, application-code: 141ms)
+ GET /dashboard 200 in 1080ms (next.js: 27ms, proxy.ts: 14ms, application-code: 1039ms)
+ POST /login 200 in 1974ms (next.js: 51ms, proxy.ts: 51ms, application-code: 1872ms)
+  └─ ƒ loginAction(undefined, {}) in 683ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 802ms (next.js: 39ms, proxy.ts: 20ms, application-code: 743ms)
+ POST /leads/ads 200 in 250ms (next.js: 25ms, proxy.ts: 20ms, application-code: 205ms)
+  └─ ƒ createLeadAction(undefined, {}) in 123ms src/lib/actions/leads.ts
+ GET /leads/warm-approach 200 in 530ms (next.js: 94ms, proxy.ts: 20ms, application-code: 416ms)
+ POST /leads/warm-approach 200 in 237ms (next.js: 31ms, proxy.ts: 35ms, application-code: 170ms)
+  └─ ƒ createLeadAction(undefined, {}) in 138ms src/lib/actions/leads.ts
+ GET /leads 200 in 334ms (next.js: 65ms, proxy.ts: 8ms, application-code: 260ms)
+ GET /login 200 in 120ms (next.js: 11ms, proxy.ts: 26ms, application-code: 83ms)
+ GET /dashboard 200 in 804ms (next.js: 16ms, proxy.ts: 10ms, application-code: 778ms)
+ POST /login 200 in 1326ms (next.js: 17ms, proxy.ts: 9ms, application-code: 1300ms)
+  └─ ƒ loginAction(undefined, {}) in 466ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 600ms (next.js: 21ms, proxy.ts: 11ms, application-code: 568ms)
+ POST /leads/ads 200 in 161ms (next.js: 19ms, proxy.ts: 11ms, application-code: 131ms)
+  └─ ƒ createLeadAction(undefined, {}) in 99ms src/lib/actions/leads.ts
+ GET /login 200 in 145ms (next.js: 24ms, proxy.ts: 8ms, application-code: 112ms)
+ GET /dashboard 200 in 1198ms (next.js: 19ms, proxy.ts: 8ms, application-code: 1171ms)
+ POST /login 200 in 1765ms (next.js: 17ms, proxy.ts: 8ms, application-code: 1740ms)
+  └─ ƒ loginAction(undefined, {}) in 501ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 809ms (next.js: 56ms, proxy.ts: 52ms, application-code: 702ms)
+ POST /leads/ads 200 in 154ms (next.js: 21ms, proxy.ts: 11ms, application-code: 121ms)
+  └─ ƒ createLeadAction(undefined, {}) in 90ms src/lib/actions/leads.ts
+ GET /dashboard 200 in 862ms (next.js: 31ms, proxy.ts: 31ms, application-code: 800ms)
+ GET /login 200 in 265ms (next.js: 86ms, proxy.ts: 20ms, application-code: 159ms)
+ GET /dashboard 200 in 911ms (next.js: 60ms, proxy.ts: 9ms, application-code: 843ms)
+ POST /login 200 in 1445ms (next.js: 12ms, proxy.ts: 16ms, application-code: 1417ms)
+  └─ ƒ loginAction(undefined, {}) in 475ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 753ms (next.js: 278ms, proxy.ts: 17ms, application-code: 459ms)
+ POST /leads/ads 200 in 613ms (next.js: 22ms, proxy.ts: 17ms, application-code: 574ms)
+  └─ ƒ createLeadAction(undefined, {}) in 231ms src/lib/actions/leads.ts
+ GET /leads/ads 200 in 36ms (next.js: 10ms, proxy.ts: 8ms, application-code: 18ms)
+ GET /leads/ads 200 in 33ms (next.js: 13ms, proxy.ts: 6ms, application-code: 14ms)
+ GET /leads/warm-approach 200 in 330ms (next.js: 62ms, proxy.ts: 6ms, application-code: 262ms)
+ POST /leads/warm-approach 200 in 752ms (next.js: 32ms, proxy.ts: 11ms, application-code: 709ms)
+  └─ ƒ createLeadAction(undefined, {}) in 266ms src/lib/actions/leads.ts
+ GET /leads/warm-approach 200 in 24ms (next.js: 9ms, proxy.ts: 5ms, application-code: 10ms)
+ GET /leads/warm-approach 200 in 26ms (next.js: 8ms, proxy.ts: 8ms, application-code: 11ms)
+ GET /leads 200 in 750ms (next.js: 179ms, proxy.ts: 7ms, application-code: 564ms)
+ GET /login 200 in 167ms (next.js: 17ms, proxy.ts: 10ms, application-code: 140ms)
+ GET /dashboard 200 in 752ms (next.js: 14ms, proxy.ts: 8ms, application-code: 729ms)
+ POST /login 200 in 1258ms (next.js: 17ms, proxy.ts: 12ms, application-code: 1229ms)
+  └─ ƒ loginAction(undefined, {}) in 447ms src/lib/actions/auth.ts
+ GET /leads/ads 200 in 722ms (next.js: 14ms, proxy.ts: 10ms, application-code: 697ms)
+ GET /leads/ads 200 in 41ms (next.js: 14ms, proxy.ts: 7ms, application-code: 20ms)
+ GET /leads/ads 200 in 32ms (next.js: 11ms, proxy.ts: 9ms, application-code: 12ms)
+ POST /leads/ads 200 in 408ms (next.js: 20ms, proxy.ts: 7ms, application-code: 381ms)
+  └─ ƒ moveLeadStageAction({}) in 140ms src/lib/actions/leads.ts
+ POST /leads/ads 200 in 343ms (next.js: 10ms, proxy.ts: 9ms, application-code: 324ms)
+  └─ ƒ moveLeadStageAction({}) in 100ms src/lib/actions/leads.ts
+ POST /leads/ads 200 in 358ms (next.js: 9ms, proxy.ts: 5ms, application-code: 344ms)
+  └─ ƒ moveLeadStageAction({}) in 125ms src/lib/actions/leads.ts
+ GET /leads/warm-approach 200 in 360ms (next.js: 16ms, proxy.ts: 8ms, application-code: 337ms)
+ GET /leads/warm-approach 200 in 22ms (next.js: 7ms, proxy.ts: 5ms, application-code: 9ms)
+ GET /leads/warm-approach 200 in 21ms (next.js: 7ms, proxy.ts: 5ms, application-code: 9ms)
+ POST /leads/warm-approach 200 in 343ms (next.js: 11ms, proxy.ts: 5ms, application-code: 326ms)
+  └─ ƒ moveLeadStageAction({}) in 122ms src/lib/actions/leads.ts
+ POST /leads/warm-approach 200 in 346ms (next.js: 13ms, proxy.ts: 6ms, application-code: 327ms)
+  └─ ƒ moveLeadStageAction({}) in 126ms src/lib/actions/leads.ts
+ GET /login 200 in 122ms (next.js: 15ms, proxy.ts: 8ms, application-code: 98ms)
+ POST /login 200 in 61ms (next.js: 20ms, proxy.ts: 16ms, application-code: 25ms)
+  └─ ƒ loginAction(undefined, {}) in 8ms src/lib/actions/auth.ts
+ GET /login 200 in 709ms (next.js: 151ms, proxy.ts: 131ms, application-code: 427ms)
+ POST /login 200 in 85ms (next.js: 16ms, proxy.ts: 31ms, application-code: 38ms)
+  └─ ƒ loginAction(undefined, {}) in 8ms src/lib/actions/auth.ts
+ GET /login 200 in 549ms (next.js: 109ms, proxy.ts: 83ms, application-code: 357ms)
+ POST /login 200 in 78ms (next.js: 15ms, proxy.ts: 21ms, application-code: 42ms)
+  └─ ƒ loginAction(undefined, {}) in 11ms src/lib/actions/auth.ts
+ GET /login 200 in 246ms (next.js: 30ms, proxy.ts: 25ms, application-code: 192ms)
+ POST /login 200 in 69ms (next.js: 10ms, proxy.ts: 18ms, application-code: 41ms)
+  └─ ƒ loginAction(undefined, {}) in 10ms src/lib/actions/auth.ts
+ GET /login 200 in 144ms (next.js: 16ms, proxy.ts: 12ms, application-code: 116ms)
+ POST /login 200 in 37ms (next.js: 10ms, proxy.ts: 10ms, application-code: 17ms)
+  └─ ƒ loginAction(undefined, {}) in 2ms src/lib/actions/auth.ts
+ GET /login 200 in 313ms (next.js: 53ms, proxy.ts: 43ms, application-code: 216ms)
+ POST /login 200 in 1276ms (next.js: 15ms, proxy.ts: 27ms, application-code: 1235ms)
+  └─ ƒ loginAction(undefined, {}) in 565ms src/lib/actions/auth.ts
+ GET /dashboard 200 in 916ms (next.js: 17ms, proxy.ts: 7ms, application-code: 892ms)
+ GET /leads 200 in 841ms (next.js: 23ms, proxy.ts: 15ms, application-code: 803ms)
+ GET /leads 200 in 68ms (next.js: 31ms, proxy.ts: 8ms, application-code: 29ms)
+ GET /leads 200 in 47ms (next.js: 25ms, proxy.ts: 8ms, application-code: 13ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 3.4s (next.js: 2.9s, proxy.ts: 6ms, application-code: 536ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1869ms (next.js: 50ms, proxy.ts: 15ms, application-code: 1805ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1787ms (next.js: 204ms, proxy.ts: 77ms, application-code: 1505ms)
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 2.2s (next.js: 75ms, proxy.ts: 25ms, application-code: 2.1s)
+  └─ ƒ createLeadActivityAction(undefined, {}) in 615ms src/lib/actions/lead-activities.ts
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1707ms (next.js: 81ms, proxy.ts: 34ms, application-code: 1593ms)
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1263ms (next.js: 45ms, proxy.ts: 13ms, application-code: 1205ms)
+  └─ ƒ createLeadActivityAction(undefined, {}) in 393ms src/lib/actions/lead-activities.ts
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1275ms (next.js: 47ms, proxy.ts: 15ms, application-code: 1212ms)
+  └─ ƒ createLeadActivityAction({"success":"Activity logged."}, {}) in 251ms src/lib/actions/lead-activities.ts
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1031ms (next.js: 54ms, proxy.ts: 35ms, application-code: 942ms)
+  └─ ƒ createLeadActivityAction({"success":"Activity logged."}, {}) in 279ms src/lib/actions/lead-activities.ts
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 962ms (next.js: 36ms, proxy.ts: 11ms, application-code: 915ms)
+  └─ ƒ createFollowUpAction(undefined, {}) in 257ms src/lib/actions/follow-ups.ts
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 949ms (next.js: 40ms, proxy.ts: 9ms, application-code: 899ms)
+  └─ ƒ createFollowUpAction({"success":"Follow-up \"QA upcoming 1430\" was scheduled."}, {}) in 288ms src/lib/actions/follow-ups.ts
+ POST /leads/cmuo0n19t000go8tcmm9mqmph 200 in 931ms (next.js: 41ms, proxy.ts: 14ms, application-code: 876ms)
+  └─ ƒ createFollowUpAction({"success":"Follow-up \"QA today late\" was scheduled."}, {}) in 210ms src/lib/actions/follow-ups.ts
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 904ms (next.js: 23ms, proxy.ts: 8ms, application-code: 874ms)
+ GET /follow-ups 200 in 1563ms (next.js: 231ms, proxy.ts: 72ms, application-code: 1260ms)
+ GET /follow-ups 200 in 45ms (next.js: 16ms, proxy.ts: 8ms, application-code: 20ms)
+ GET /follow-ups?view=upcoming 200 in 1660ms (next.js: 26ms, proxy.ts: 24ms, application-code: 1611ms)
+ GET /follow-ups?view=upcoming 200 in 414ms (next.js: 16ms, proxy.ts: 9ms, application-code: 389ms)
+ POST /follow-ups?view=upcoming 200 in 774ms (next.js: 18ms, proxy.ts: 10ms, application-code: 746ms)
+  └─ ƒ updateFollowUpAction(undefined, {}) in 272ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=upcoming 200 in 402ms (next.js: 14ms, proxy.ts: 15ms, application-code: 373ms)
+ GET /follow-ups?view=upcoming 200 in 62ms (next.js: 10ms, proxy.ts: 5ms, application-code: 47ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=upcoming 200 in 505ms (next.js: 20ms, proxy.ts: 8ms, application-code: 477ms)
+ GET /follow-ups?view=upcoming 200 in 323ms (next.js: 13ms, proxy.ts: 12ms, application-code: 298ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=overdue 200 in 874ms (next.js: 20ms, proxy.ts: 17ms, application-code: 837ms)
+ GET /follow-ups?view=overdue 200 in 1097ms (next.js: 25ms, proxy.ts: 31ms, application-code: 1040ms)
+ POST /follow-ups?view=overdue 200 in 805ms (next.js: 44ms, proxy.ts: 116ms, application-code: 645ms)
+  └─ ƒ rescheduleFollowUpAction({}) in 232ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=upcoming 200 in 464ms (next.js: 12ms, proxy.ts: 11ms, application-code: 440ms)
+ GET /follow-ups?view=upcoming 200 in 219ms (next.js: 14ms, proxy.ts: 8ms, application-code: 197ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=today 200 in 516ms (next.js: 8ms, proxy.ts: 7ms, application-code: 501ms)
+ GET /follow-ups?view=today 200 in 220ms (next.js: 9ms, proxy.ts: 6ms, application-code: 204ms)
+ POST /follow-ups?view=today 200 in 366ms (next.js: 10ms, proxy.ts: 6ms, application-code: 350ms)
+  └─ ƒ completeFollowUpAction({}) in 124ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=completed 200 in 397ms (next.js: 7ms, proxy.ts: 7ms, application-code: 383ms)
+ GET /follow-ups?view=completed 200 in 200ms (next.js: 8ms, proxy.ts: 7ms, application-code: 185ms)
+ GET /follow-ups?view=upcoming 200 in 383ms (next.js: 12ms, proxy.ts: 6ms, application-code: 365ms)
+ GET /follow-ups?view=upcoming 200 in 346ms (next.js: 13ms, proxy.ts: 13ms, application-code: 320ms)
+ POST /follow-ups?view=upcoming 200 in 702ms (next.js: 31ms, proxy.ts: 11ms, application-code: 659ms)
+  └─ ƒ cancelFollowUpAction({}) in 214ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 469ms (next.js: 11ms, proxy.ts: 5ms, application-code: 453ms)
+ GET /leads 200 in 643ms (next.js: 154ms, proxy.ts: 6ms, application-code: 483ms)
+ GET /leads 200 in 36ms (next.js: 11ms, proxy.ts: 8ms, application-code: 17ms)
+ GET /leads 200 in 30ms (next.js: 10ms, proxy.ts: 9ms, application-code: 11ms)
+ POST /leads 200 in 1258ms (next.js: 58ms, proxy.ts: 37ms, application-code: 1163ms)
+  └─ ƒ updateLeadAction(undefined, {}) in 389ms src/lib/actions/leads.ts
+ GET /leads?q=warm&pipeline=WARM_APPROACH&stage=PROPOSAL_SENT&assignedRep=all 200 in 362ms (next.js: 14ms, proxy.ts: 11ms, application-code: 337ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH&stage=PROPOSAL_SENT&assignedRep=all 200 in 297ms (next.js: 10ms, proxy.ts: 6ms, application-code: 280ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH&stage=PROPOSAL_SENT&assignedRep=all 200 in 257ms (next.js: 12ms, proxy.ts: 7ms, application-code: 237ms)
+ GET /leads 200 in 756ms (next.js: 25ms, proxy.ts: 30ms, application-code: 701ms)
+ GET /leads 200 in 31ms (next.js: 10ms, proxy.ts: 7ms, application-code: 14ms)
+ GET /leads 200 in 27ms (next.js: 11ms, proxy.ts: 6ms, application-code: 10ms)
+ GET /leads 200 in 66ms (next.js: 41ms, proxy.ts: 8ms, application-code: 16ms)
+ GET /leads?q=warm 200 in 252ms (next.js: 17ms, proxy.ts: 12ms, application-code: 224ms)
+ GET /leads?pipeline=WARM_APPROACH 200 in 237ms (next.js: 12ms, proxy.ts: 8ms, application-code: 217ms)
+ GET /leads?pipeline=WARM_APPROACH&stage=PROPOSAL_SENT 200 in 198ms (next.js: 9ms, proxy.ts: 7ms, application-code: 182ms)
+ GET /leads?pipeline=WARM_APPROACH&stage=PROPOSAL_SENT&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 266ms (next.js: 9ms, proxy.ts: 6ms, application-code: 251ms)
+ GET /leads?pipeline=WARM_APPROACH&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 168ms (next.js: 11ms, proxy.ts: 6ms, application-code: 152ms)
+ GET /leads 200 in 837ms (next.js: 64ms, proxy.ts: 38ms, application-code: 735ms)
+ GET /leads 200 in 63ms (next.js: 19ms, proxy.ts: 23ms, application-code: 21ms)
+ GET /leads?q=warm 200 in 230ms (next.js: 10ms, proxy.ts: 5ms, application-code: 215ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH 200 in 279ms (next.js: 15ms, proxy.ts: 8ms, application-code: 257ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH&stage=PROPOSAL_SENT 200 in 246ms (next.js: 14ms, proxy.ts: 6ms, application-code: 226ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH&stage=PROPOSAL_SENT&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 237ms (next.js: 15ms, proxy.ts: 6ms, application-code: 216ms)
+ GET /leads?q=warm&pipeline=WARM_APPROACH&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 187ms (next.js: 14ms, proxy.ts: 10ms, application-code: 163ms)
+ GET /leads?pipeline=WARM_APPROACH&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 172ms (next.js: 10ms, proxy.ts: 8ms, application-code: 154ms)
+ GET /leads?pipeline=WARM_APPROACH&assignedRep=cmu8557dz002zh0tcilrlww4c 200 in 153ms (next.js: 9ms, proxy.ts: 5ms, application-code: 138ms)
+ GET /leads 200 in 26ms (next.js: 9ms, proxy.ts: 5ms, application-code: 11ms)
+ GET /leads 200 in 181ms (next.js: 10ms, proxy.ts: 5ms, application-code: 165ms)
+ GET /leads?q=acme 200 in 158ms (next.js: 9ms, proxy.ts: 5ms, application-code: 145ms)
+ GET /leads?q=acme&source=zzz 200 in 174ms (next.js: 12ms, proxy.ts: 5ms, application-code: 157ms)
+ GET /leads 200 in 29ms (next.js: 11ms, proxy.ts: 8ms, application-code: 11ms)
+ GET /leads 200 in 151ms (next.js: 9ms, proxy.ts: 5ms, application-code: 137ms)
+ GET /leads 200 in 23ms (next.js: 8ms, proxy.ts: 5ms, application-code: 10ms)
+ GET /dashboard 200 in 2.5s (next.js: 49ms, proxy.ts: 9ms, application-code: 2.5s)
+ GET /dashboard?range=today 200 in 1252ms (next.js: 24ms, proxy.ts: 16ms, application-code: 1213ms)
+ GET /dashboard?range=7d 200 in 986ms (next.js: 10ms, proxy.ts: 9ms, application-code: 967ms)
+ GET /dashboard?range=all 200 in 786ms (next.js: 8ms, proxy.ts: 7ms, application-code: 770ms)
+ GET /dashboard?range=custom 200 in 385ms (next.js: 12ms, proxy.ts: 7ms, application-code: 366ms)
+ GET /dashboard 200 in 637ms (next.js: 8ms, proxy.ts: 6ms, application-code: 623ms)
+ GET /reports 200 in 925ms (next.js: 90ms, proxy.ts: 5ms, application-code: 830ms)
+ GET /reports 200 in 723ms (next.js: 12ms, proxy.ts: 10ms, application-code: 701ms)
+ GET /reports 200 in 1782ms (next.js: 38ms, proxy.ts: 35ms, application-code: 1709ms)
+ GET /reports 200 in 1478ms (next.js: 50ms, proxy.ts: 96ms, application-code: 1331ms)
+ GET /reports/export? 200 in 3.3s (next.js: 2.7s, proxy.ts: 14ms, application-code: 587ms)
+ GET /reports/export?range=7d&pipeline=ADS 200 in 186ms (next.js: 25ms, proxy.ts: 11ms, application-code: 150ms)
+ GET /login?next=%2Freports%2Fexport 200 in 202ms (next.js: 58ms, proxy.ts: 6ms, application-code: 138ms)
+ GET /admin/users 200 in 977ms (next.js: 176ms, proxy.ts: 44ms, application-code: 757ms)
+ GET /admin/users 200 in 43ms (next.js: 12ms, proxy.ts: 8ms, application-code: 24ms)
+ POST /admin/users 200 in 1375ms (next.js: 42ms, proxy.ts: 34ms, application-code: 1299ms)
+  └─ ƒ createUserAction(undefined, {}) in 807ms src/lib/actions/users.ts
+ GET /settings 200 in 967ms (next.js: 48ms, proxy.ts: 13ms, application-code: 906ms)
+ GET /login 200 in 130ms (next.js: 24ms, proxy.ts: 10ms, application-code: 97ms)
+ GET /dashboard 200 in 1142ms (next.js: 54ms, proxy.ts: 13ms, application-code: 1074ms)
+ POST /login 200 in 1730ms (next.js: 11ms, proxy.ts: 8ms, application-code: 1711ms)
+  └─ ƒ loginAction(undefined, {}) in 495ms src/lib/actions/auth.ts
+ GET /settings 200 in 900ms (next.js: 16ms, proxy.ts: 8ms, application-code: 876ms)
+ GET /unauthorized 200 in 1938ms (next.js: 1691ms, proxy.ts: 13ms, application-code: 234ms)
+ GET /admin/users 200 in 754ms (next.js: 176ms, proxy.ts: 38ms, application-code: 540ms)
+ GET /unauthorized 200 in 130ms (next.js: 53ms, proxy.ts: 9ms, application-code: 69ms)
+ GET /reports 200 in 412ms (next.js: 92ms, proxy.ts: 10ms, application-code: 310ms)
+ GET /unauthorized 200 in 84ms (next.js: 12ms, proxy.ts: 9ms, application-code: 63ms)
+ GET /reports/export 403 in 221ms (next.js: 62ms, proxy.ts: 32ms, application-code: 127ms)
+ GET /leads 200 in 893ms (next.js: 122ms, proxy.ts: 30ms, application-code: 741ms)
+ GET /leads 200 in 49ms (next.js: 16ms, proxy.ts: 11ms, application-code: 22ms)
+ GET /leads/ads 200 in 872ms (next.js: 183ms, proxy.ts: 13ms, application-code: 676ms)
+ GET /leads/ads 200 in 28ms (next.js: 10ms, proxy.ts: 6ms, application-code: 13ms)
+ GET /follow-ups 200 in 694ms (next.js: 53ms, proxy.ts: 8ms, application-code: 633ms)
+ GET /follow-ups 200 in 61ms (next.js: 18ms, proxy.ts: 11ms, application-code: 31ms)
+ GET /clients 200 in 503ms (next.js: 242ms, proxy.ts: 7ms, application-code: 253ms)
+ GET /clients 200 in 123ms (next.js: 56ms, proxy.ts: 41ms, application-code: 26ms)
+ GET /leads/ads 200 in 472ms (next.js: 39ms, proxy.ts: 16ms, application-code: 417ms)
+ GET /leads/ads 200 in 23ms (next.js: 7ms, proxy.ts: 7ms, application-code: 9ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1075ms (next.js: 87ms, proxy.ts: 7ms, application-code: 982ms)
+ GET /leads 200 in 1066ms (next.js: 40ms, proxy.ts: 46ms, application-code: 981ms)
+ GET /leads 200 in 31ms (next.js: 10ms, proxy.ts: 7ms, application-code: 13ms)
+ POST /leads 200 in 1613ms (next.js: 48ms, proxy.ts: 33ms, application-code: 1532ms)
+  └─ ƒ createLeadAction(undefined, {}) in 731ms src/lib/actions/leads.ts
+ GET /leads 200 in 649ms (next.js: 17ms, proxy.ts: 16ms, application-code: 616ms)
+ GET /leads 200 in 76ms (next.js: 48ms, proxy.ts: 10ms, application-code: 18ms)
+ POST /leads 200 in 782ms (next.js: 27ms, proxy.ts: 21ms, application-code: 734ms)
+  └─ ƒ deleteLeadAction({}) in 344ms src/lib/actions/leads.ts
+ GET /leads 200 in 438ms (next.js: 13ms, proxy.ts: 7ms, application-code: 418ms)
+ GET /leads 200 in 25ms (next.js: 9ms, proxy.ts: 5ms, application-code: 10ms)
+ GET /dashboard 200 in 1872ms (next.js: 253ms, proxy.ts: 14ms, application-code: 1605ms)
+ GET /leads/ads 200 in 486ms (next.js: 13ms, proxy.ts: 9ms, application-code: 464ms)
+ GET /leads/ads 200 in 25ms (next.js: 9ms, proxy.ts: 6ms, application-code: 11ms)
+ GET /leads/warm-approach 200 in 568ms (next.js: 93ms, proxy.ts: 8ms, application-code: 467ms)
+ GET /leads/warm-approach 200 in 30ms (next.js: 11ms, proxy.ts: 6ms, application-code: 13ms)
+ GET /leads 200 in 500ms (next.js: 14ms, proxy.ts: 6ms, application-code: 479ms)
+ GET /leads 200 in 31ms (next.js: 12ms, proxy.ts: 7ms, application-code: 12ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 854ms (next.js: 38ms, proxy.ts: 7ms, application-code: 809ms)
+ GET /follow-ups?view=all 200 in 949ms (next.js: 32ms, proxy.ts: 29ms, application-code: 888ms)
+ GET /follow-ups?view=all 200 in 250ms (next.js: 10ms, proxy.ts: 6ms, application-code: 234ms)
+ GET /reports 200 in 745ms (next.js: 10ms, proxy.ts: 5ms, application-code: 729ms)
+ GET /admin/users 200 in 445ms (next.js: 11ms, proxy.ts: 8ms, application-code: 425ms)
+ GET /admin/users 200 in 30ms (next.js: 12ms, proxy.ts: 6ms, application-code: 12ms)
+ GET /settings 200 in 678ms (next.js: 116ms, proxy.ts: 9ms, application-code: 553ms)
+ GET /clients 200 in 297ms (next.js: 13ms, proxy.ts: 10ms, application-code: 273ms)
+ GET /clients 200 in 24ms (next.js: 8ms, proxy.ts: 5ms, application-code: 10ms)
+ GET /dashboard 200 in 1368ms (next.js: 21ms, proxy.ts: 10ms, application-code: 1337ms)
+ GET /leads/ads 200 in 462ms (next.js: 15ms, proxy.ts: 10ms, application-code: 437ms)
+ GET /leads/ads 200 in 24ms (next.js: 8ms, proxy.ts: 5ms, application-code: 11ms)
+ GET /leads/warm-approach 200 in 464ms (next.js: 17ms, proxy.ts: 10ms, application-code: 438ms)
+ GET /leads/warm-approach 200 in 29ms (next.js: 10ms, proxy.ts: 7ms, application-code: 12ms)
+ GET /leads 200 in 500ms (next.js: 13ms, proxy.ts: 8ms, application-code: 479ms)
+ GET /leads 200 in 24ms (next.js: 8ms, proxy.ts: 5ms, application-code: 11ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1062ms (next.js: 32ms, proxy.ts: 7ms, application-code: 1023ms)
+ GET /follow-ups?view=all 200 in 1249ms (next.js: 40ms, proxy.ts: 16ms, application-code: 1193ms)
+ GET /follow-ups?view=all 200 in 248ms (next.js: 9ms, proxy.ts: 6ms, application-code: 233ms)
+ GET /reports 200 in 1346ms (next.js: 25ms, proxy.ts: 14ms, application-code: 1307ms)
+ GET /admin/users 200 in 557ms (next.js: 13ms, proxy.ts: 10ms, application-code: 534ms)
+ GET /admin/users 200 in 27ms (next.js: 10ms, proxy.ts: 8ms, application-code: 10ms)
+ GET /settings 200 in 716ms (next.js: 11ms, proxy.ts: 10ms, application-code: 695ms)
+ GET /clients 200 in 362ms (next.js: 13ms, proxy.ts: 11ms, application-code: 338ms)
+ GET /clients 200 in 20ms (next.js: 8ms, proxy.ts: 5ms, application-code: 8ms)
+ GET /dashboard 200 in 1669ms (next.js: 17ms, proxy.ts: 9ms, application-code: 1643ms)
+ GET /leads/ads 200 in 593ms (next.js: 25ms, proxy.ts: 12ms, application-code: 556ms)
+ GET /leads/ads 200 in 43ms (next.js: 12ms, proxy.ts: 8ms, application-code: 24ms)
+ GET /leads/warm-approach 200 in 496ms (next.js: 15ms, proxy.ts: 7ms, application-code: 473ms)
+ GET /leads/warm-approach 200 in 33ms (next.js: 10ms, proxy.ts: 7ms, application-code: 16ms)
+ GET /leads 200 in 526ms (next.js: 13ms, proxy.ts: 8ms, application-code: 505ms)
+ GET /leads 200 in 44ms (next.js: 20ms, proxy.ts: 7ms, application-code: 17ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 1234ms (next.js: 46ms, proxy.ts: 11ms, application-code: 1176ms)
+ GET /follow-ups?view=all 200 in 747ms (next.js: 12ms, proxy.ts: 12ms, application-code: 723ms)
+ GET /follow-ups?view=all 200 in 345ms (next.js: 8ms, proxy.ts: 5ms, application-code: 332ms)
+ GET /reports 200 in 747ms (next.js: 14ms, proxy.ts: 12ms, application-code: 721ms)
+ GET /admin/users 200 in 488ms (next.js: 12ms, proxy.ts: 7ms, application-code: 470ms)
+ GET /admin/users 200 in 44ms (next.js: 15ms, proxy.ts: 9ms, application-code: 20ms)
+ GET /settings 200 in 648ms (next.js: 19ms, proxy.ts: 11ms, application-code: 618ms)
+ GET /clients 200 in 370ms (next.js: 13ms, proxy.ts: 10ms, application-code: 348ms)
+ GET /clients 200 in 27ms (next.js: 9ms, proxy.ts: 6ms, application-code: 12ms)
+ GET /dashboard 200 in 1743ms (next.js: 13ms, proxy.ts: 9ms, application-code: 1721ms)
+ GET /leads/ads 200 in 583ms (next.js: 20ms, proxy.ts: 9ms, application-code: 555ms)
+ GET /leads/ads 200 in 30ms (next.js: 10ms, proxy.ts: 7ms, application-code: 13ms)
+ GET /leads/warm-approach 200 in 466ms (next.js: 16ms, proxy.ts: 9ms, application-code: 442ms)
+ GET /leads/warm-approach 200 in 26ms (next.js: 9ms, proxy.ts: 6ms, application-code: 11ms)
+ GET /leads 200 in 450ms (next.js: 13ms, proxy.ts: 7ms, application-code: 430ms)
+ GET /leads 200 in 30ms (next.js: 11ms, proxy.ts: 7ms, application-code: 11ms)
+ GET /leads/cmuo0n19t000go8tcmm9mqmph 200 in 910ms (next.js: 42ms, proxy.ts: 6ms, application-code: 861ms)
+ GET /follow-ups?view=all 200 in 834ms (next.js: 18ms, proxy.ts: 15ms, application-code: 801ms)
+ GET /follow-ups?view=all 200 in 317ms (next.js: 12ms, proxy.ts: 6ms, application-code: 299ms)
+ GET /reports 200 in 705ms (next.js: 12ms, proxy.ts: 5ms, application-code: 687ms)
+ GET /admin/users 200 in 529ms (next.js: 16ms, proxy.ts: 11ms, application-code: 502ms)
+ GET /admin/users 200 in 28ms (next.js: 9ms, proxy.ts: 6ms, application-code: 13ms)
+ GET /settings 200 in 568ms (next.js: 11ms, proxy.ts: 8ms, application-code: 550ms)
+ GET /clients 200 in 378ms (next.js: 16ms, proxy.ts: 9ms, application-code: 353ms)
+ GET /clients 200 in 28ms (next.js: 10ms, proxy.ts: 7ms, application-code: 11ms)
+ GET /leads/warm-approach 200 in 1525ms (next.js: 108ms, proxy.ts: 94ms, application-code: 1323ms)
+ GET /leads/warm-approach 200 in 61ms (next.js: 30ms, proxy.ts: 12ms, application-code: 18ms)
+ GET /leads/warm-approach 200 in 531ms (next.js: 12ms, proxy.ts: 8ms, application-code: 511ms)
+ GET /leads/warm-approach 200 in 64ms (next.js: 18ms, proxy.ts: 12ms, application-code: 34ms)
+ GET /leads/ads 200 in 1867ms (next.js: 456ms, proxy.ts: 73ms, application-code: 1338ms)
+ GET /leads/ads 200 in 46ms (next.js: 15ms, proxy.ts: 10ms, application-code: 20ms)
+ GET /dashboard 200 in 1980ms (next.js: 115ms, proxy.ts: 11ms, application-code: 1854ms)
+ GET /leads/ads 200 in 400ms (next.js: 24ms, proxy.ts: 15ms, application-code: 361ms)
+ GET /clients 200 in 848ms (next.js: 184ms, proxy.ts: 34ms, application-code: 630ms)
+ GET /clients 200 in 65ms (next.js: 18ms, proxy.ts: 23ms, application-code: 23ms)
+ POST /clients 200 in 1609ms (next.js: 68ms, proxy.ts: 21ms, application-code: 1519ms)
+  └─ ƒ createClientAction(undefined, {}) in 909ms src/lib/actions/clients.ts
+ GET /clients 200 in 637ms (next.js: 57ms, proxy.ts: 29ms, application-code: 551ms)
+ GET /clients 200 in 46ms (next.js: 18ms, proxy.ts: 10ms, application-code: 18ms)
+ GET /clients/cmuo1dwj3001jo8tcd6whpebo 200 in 2.7s (proxy.ts: 17ms)
+ GET /clients 200 in 1103ms (next.js: 187ms, proxy.ts: 44ms, application-code: 871ms)
+ GET /clients 200 in 91ms (next.js: 24ms, proxy.ts: 23ms, application-code: 44ms)
+ GET /clients/cmuo1dwj3001jo8tcd6whpebo 200 in 2.0s (next.js: 311ms, proxy.ts: 27ms, application-code: 1675ms)
+ GET /clients 200 in 588ms (next.js: 30ms, proxy.ts: 34ms, application-code: 525ms)
+✓ Finished filesystem cache database compaction in 12.7s
+ GET /login 200 in 938ms (next.js: 438ms, proxy.ts: 124ms, application-code: 376ms)
+ GET /login 200 in 2.7s (next.js: 201ms, proxy.ts: 507ms, application-code: 2.0s)
+ GET /dashboard 200 in 6.9s (next.js: 1483ms, proxy.ts: 20ms, application-code: 5.4s)
+ POST /login 200 in 8.9s (next.js: 203ms, proxy.ts: 201ms, application-code: 8.5s)
+  └─ ƒ loginAction(undefined, {}) in 1180ms src/lib/actions/auth.ts
+ GET /dashboard 200 in 2.5s (next.js: 45ms, proxy.ts: 317ms, application-code: 2.1s)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /dashboard 200 in 4.7s (next.js: 127ms, proxy.ts: 57ms, application-code: 4.5s)
+ GET /follow-ups?view=all 200 in 5.6s (next.js: 1114ms, proxy.ts: 27ms, application-code: 4.4s)
+ GET /follow-ups?view=all 200 in 1383ms (next.js: 43ms, proxy.ts: 37ms, application-code: 1303ms)
+ GET /follow-ups?view=all 200 in 3.3s (next.js: 24ms, proxy.ts: 26ms, application-code: 3.2s)
+ GET /follow-ups?view=all 200 in 813ms (next.js: 102ms, proxy.ts: 11ms, application-code: 700ms)
+ POST /follow-ups?view=all 200 in 2.2s (next.js: 71ms, proxy.ts: 85ms, application-code: 2.1s)
+  └─ ƒ rescheduleFollowUpAction({}) in 745ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 1087ms (next.js: 102ms, proxy.ts: 39ms, application-code: 946ms)
+ GET /follow-ups?view=all 200 in 936ms (next.js: 24ms, proxy.ts: 25ms, application-code: 887ms)
+ POST /follow-ups?view=all 200 in 2.7s (next.js: 58ms, proxy.ts: 142ms, application-code: 2.5s)
+  └─ ƒ updateFollowUpAction(undefined, {}) in 1077ms src/lib/actions/follow-ups.ts
+ GET /login 200 in 379ms (next.js: 94ms, proxy.ts: 58ms, application-code: 226ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+ GET /dashboard 200 in 2.8s (next.js: 449ms, proxy.ts: 17ms, application-code: 2.3s)
+ POST /login 200 in 3.6s (next.js: 55ms, proxy.ts: 32ms, application-code: 3.5s)
+  └─ ƒ loginAction(undefined, {}) in 590ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 4.0s (next.js: 24ms, proxy.ts: 16ms, application-code: 3.9s)
+prisma:error 
+Invalid `prisma.auditLog.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.auditLog.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  150 |
+  151 |   const [metrics, upcomingFollowUps, overdueFollowUps, recentLeads, recentActivities, recentStageChanges] =
+> 152 |     await Promise.all([
+      |     ^
+  153 |       getDashboardMetrics(range, now),
+  154 |       db.followUp.findMany({
+  155 |       where: buildFollowUpViewWhere("upcoming", now, timeZone), {
+  code: 'P1017',
+  meta: {
+    modelName: 'AuditLog',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      150 |
+      151 |   const [metrics, upcomingFollowUps, overdueFollowUps, recentLeads, recentActivities, recentStageChanges] =
+    > 152 |     await Promise.all([
+          |     ^
+      153 |       getDashboardMetrics(range, now),
+      154 |       db.followUp.findMany({
+      155 |       where: buildFollowUpViewWhere("upcoming", now, timeZone), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3749746299'
+}
+ GET /dashboard 200 in 3.0s (next.js: 111ms, proxy.ts: 57ms, application-code: 2.9s)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+ GET /dashboard 200 in 3.0s (next.js: 57ms, proxy.ts: 99ms, application-code: 2.9s)
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+ GET /follow-ups?view=all 200 in 7.9s (next.js: 322ms, proxy.ts: 245ms, application-code: 7.3s)
+ GET /follow-ups?view=all 200 in 9.0s (next.js: 31ms, proxy.ts: 151ms, application-code: 8.8s)
+ GET /follow-ups?view=all 200 in 7.9s (next.js: 179ms, proxy.ts: 532ms, application-code: 7.2s)
+ GET /login 200 in 691ms (next.js: 117ms, proxy.ts: 111ms, application-code: 463ms)
+prisma:error Connection terminated unexpectedly
+⨯ Error: Connection terminated unexpectedly
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  clientVersion: '7.10.0',
+  digest: '118510995'
+}
+ GET /dashboard 200 in 1279ms (next.js: 66ms, proxy.ts: 21ms, application-code: 1192ms)
+ POST /login 200 in 2.3s (next.js: 72ms, proxy.ts: 30ms, application-code: 2.2s)
+  └─ ƒ loginAction(undefined, {}) in 767ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+[browser] Error: Connection terminated unexpectedly
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+[browser] Error: Connection terminated unexpectedly
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+ GET /dashboard 200 in 903ms (next.js: 32ms, proxy.ts: 33ms, application-code: 838ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /dashboard 200 in 1313ms (next.js: 24ms, proxy.ts: 175ms, application-code: 1114ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 1635ms (next.js: 43ms, proxy.ts: 24ms, application-code: 1569ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.leadActivity.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 2.0s (next.js: 67ms, proxy.ts: 48ms, application-code: 1907ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 2.3s (next.js: 126ms, proxy.ts: 61ms, application-code: 2.1s)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+ GET /follow-ups?view=all 200 in 2.8s (next.js: 780ms, proxy.ts: 359ms, application-code: 1638ms)
+ GET /login 200 in 572ms (next.js: 206ms, proxy.ts: 67ms, application-code: 299ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+ GET /dashboard 200 in 844ms (next.js: 140ms, proxy.ts: 19ms, application-code: 685ms)
+ POST /login 200 in 1774ms (next.js: 38ms, proxy.ts: 27ms, application-code: 1708ms)
+  └─ ƒ loginAction(undefined, {}) in 784ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.followUp.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2124451580'
+}
+ GET /dashboard 200 in 1265ms (next.js: 51ms, proxy.ts: 13ms, application-code: 1202ms)
+ GET /dashboard 200 in 792ms (next.js: 27ms, proxy.ts: 41ms, application-code: 725ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 1643ms (next.js: 101ms, proxy.ts: 11ms, application-code: 1531ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 1066ms (next.js: 37ms, proxy.ts: 50ms, application-code: 979ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 654ms (next.js: 152ms, proxy.ts: 333ms, application-code: 169ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 1541ms (next.js: 25ms, proxy.ts: 24ms, application-code: 1492ms)
+prisma:error 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique()` invocation in
+C:\Users\Raj Sharma\OneDrive\Desktop\HH CRM\.next\dev\server\chunks\ssr\[root-of-the-server]__1_-a44s._.js:179:154
+
+  176 }
+  177 async function validateSessionToken(token) {
+  178     const tokenHash = hashToken(token);
+→ 179     const session = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique(
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+ GET /login 200 in 421ms (next.js: 51ms, proxy.ts: 49ms, application-code: 321ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+ GET /dashboard 200 in 747ms (next.js: 36ms, proxy.ts: 12ms, application-code: 699ms)
+ POST /login 200 in 1448ms (next.js: 21ms, proxy.ts: 18ms, application-code: 1409ms)
+  └─ ƒ loginAction(undefined, {}) in 585ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 1152ms (next.js: 53ms, proxy.ts: 21ms, application-code: 1078ms)
+ GET /dashboard 200 in 483ms (next.js: 23ms, proxy.ts: 21ms, application-code: 439ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /dashboard 200 in 837ms (next.js: 16ms, proxy.ts: 40ms, application-code: 780ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.auditLog.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 1434ms (next.js: 105ms, proxy.ts: 38ms, application-code: 1290ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 1876ms (next.js: 29ms, proxy.ts: 212ms, application-code: 1635ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 2.2s (next.js: 41ms, proxy.ts: 33ms, application-code: 2.1s)
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+ GET /login 200 in 746ms (next.js: 93ms, proxy.ts: 106ms, application-code: 547ms)
+ GET /login 200 in 1440ms (next.js: 92ms, proxy.ts: 101ms, application-code: 1247ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+ GET /dashboard 200 in 660ms (next.js: 43ms, proxy.ts: 12ms, application-code: 605ms)
+ POST /login 200 in 1807ms (next.js: 25ms, proxy.ts: 13ms, application-code: 1769ms)
+  └─ ƒ loginAction(undefined, {}) in 1023ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.leadActivity.findMany()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 1104ms (next.js: 37ms, proxy.ts: 17ms, application-code: 1050ms)
+ GET /dashboard 200 in 569ms (next.js: 38ms, proxy.ts: 43ms, application-code: 489ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /dashboard 200 in 853ms (next.js: 23ms, proxy.ts: 89ms, application-code: 741ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.leadActivity.findMany()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique()` invocation in
+C:\Users\Raj Sharma\OneDrive\Desktop\HH CRM\.next\dev\server\chunks\ssr\[root-of-the-server]__1_-a44s._.js:179:154
+
+  176 }
+  177 async function validateSessionToken(token) {
+  178     const tokenHash = hashToken(token);
+→ 179     const session = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique(
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/db.ts}["db"].session.findUnique()` invocation in
+C:\Users\Raj Sharma\OneDrive\Desktop\HH CRM\.next\dev\server\chunks\ssr\[root-of-the-server]__1_-a44s._.js:179:154
+
+  176 }
+  177 async function validateSessionToken(token) {
+  178     const tokenHash = hashToken(token);
+→ 179     const session = await {imported module ./src/lib/db.ts}["db"].session.findUnique(
+Server has closed the connection.
+    at <unknown> (src\lib\session.ts:99:36)
+    at async validateSessionToken (src\lib\session.ts:99:19)
+   97 |   const tokenHash = hashToken(token);
+   98 |
+>  99 |   const session = await db.session.findUnique({
+      |                                    ^
+  100 |     where: { tokenHash },
+  101 |     include: {
+  102 |       user: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'Session',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3780808282'
+}
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `{imported module ./src/lib/db.ts}["db"].session.findUnique()` invocation in
+C:\Users\Raj Sharma\OneDrive\Desktop\HH CRM\.next\dev\server\chunks\ssr\[root-of-the-server]__1_-a44s._.js:179:154
+
+  176 }
+  177 async function validateSessionToken(token) {
+  178     const tokenHash = hashToken(token);
+→ 179     const session = await {imported module ./src/lib/db.ts}["db"].session.findUnique(
+Server has closed the connection.
+    at <unknown> (src\lib\session.ts:99:36)
+    at async validateSessionToken (src\lib\session.ts:99:19)
+   97 |   const tokenHash = hashToken(token);
+   98 |
+>  99 |   const session = await db.session.findUnique({
+      |                                    ^
+  100 |     where: { tokenHash },
+  101 |     include: {
+  102 |       user: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'Session',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at ignore-listed frames {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3780808282'
+}
+ GET /follow-ups?view=all 200 in 622ms (next.js: 99ms, proxy.ts: 16ms, application-code: 507ms)
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+[browser] Uncaught Error: Switched to client rendering because the server rendering errored:
+
+
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: {
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 1092ms (next.js: 179ms, proxy.ts: 37ms, application-code: 876ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 1130ms (next.js: 59ms, proxy.ts: 53ms, application-code: 1018ms)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+ GET /follow-ups?view=all 200 in 1131ms (next.js: 26ms, proxy.ts: 25ms, application-code: 1080ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 717ms (next.js: 38ms, proxy.ts: 22ms, application-code: 656ms)
+ POST /follow-ups?view=all 200 in 1570ms (next.js: 153ms, proxy.ts: 76ms, application-code: 1342ms)
+  └─ ƒ rescheduleFollowUpAction({}) in 594ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 787ms (next.js: 17ms, proxy.ts: 13ms, application-code: 757ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 517ms (next.js: 18ms, proxy.ts: 24ms, application-code: 475ms)
+ POST /follow-ups?view=all 200 in 1416ms (next.js: 46ms, proxy.ts: 30ms, application-code: 1340ms)
+  └─ ƒ updateFollowUpAction(undefined, {}) in 575ms src/lib/actions/follow-ups.ts
+ GET /login 200 in 123ms (next.js: 17ms, proxy.ts: 14ms, application-code: 93ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+ GET /dashboard 200 in 547ms (next.js: 16ms, proxy.ts: 15ms, application-code: 516ms)
+ POST /login 200 in 1033ms (next.js: 11ms, proxy.ts: 9ms, application-code: 1013ms)
+  └─ ƒ loginAction(undefined, {}) in 410ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'User',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2451344044'
+}
+ GET /follow-ups?view=all 200 in 1217ms (next.js: 30ms, proxy.ts: 22ms, application-code: 1165ms)
+ GET /dashboard 200 in 1001ms (next.js: 21ms, proxy.ts: 96ms, application-code: 884ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /dashboard 200 in 736ms (next.js: 30ms, proxy.ts: 24ms, application-code: 682ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique()` invocation in
+C:\Users\Raj Sharma\OneDrive\Desktop\HH CRM\.next\dev\server\chunks\ssr\[root-of-the-server]__1_-a44s._.js:179:154
+
+  176 }
+  177 async function validateSessionToken(token) {
+  178     const tokenHash = hashToken(token);
+→ 179     const session = await __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$lib$2f$db$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["db"].session.findUnique(
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 546ms (next.js: 216ms, proxy.ts: 181ms, application-code: 149ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 750ms (next.js: 30ms, proxy.ts: 17ms, application-code: 703ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /follow-ups?view=all 200 in 1018ms (next.js: 28ms, proxy.ts: 20ms, application-code: 970ms)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { (src/app/(app)
+ GET /follow-ups?view=all 200 in 1081ms (next.js: 24ms, proxy.ts: 33ms, application-code: 1024ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 976ms (next.js: 39ms, proxy.ts: 18ms, application-code: 918ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ POST /follow-ups?view=all 200 in 1693ms (next.js: 27ms, proxy.ts: 20ms, application-code: 1645ms)
+  └─ ƒ rescheduleFollowUpAction({}) in 795ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 888ms (next.js: 34ms, proxy.ts: 16ms, application-code: 838ms)
+ GET /follow-ups?view=all 200 in 599ms (next.js: 13ms, proxy.ts: 10ms, application-code: 577ms)
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+    at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+  67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+  68 |
+> 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+     |                                                                    ^
+  70 |     db.followUp.findMany({
+  71 |       where,
+  72 |       include: { {
+  code: 'P1017',
+  meta: {
+    modelName: 'FollowUp',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async FollowUpsPage (src\app\(app)\follow-ups\page.tsx:69:68)
+      67 |   const where = buildFollowUpWhere({ view, q, priority, status, assignedRep, now, timeZone });
+      68 |
+    > 69 |   const [followUps, leads, reps, viewCounts, totalFollowUpCount] = await Promise.all([
+         |                                                                    ^
+      70 |     db.followUp.findMany({
+      71 |       where,
+      72 |       include: { {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '941101226'
+}
+ GET /follow-ups?view=all 200 in 495ms (next.js: 30ms, proxy.ts: 19ms, application-code: 446ms)
+ POST /follow-ups?view=all 200 in 1091ms (next.js: 24ms, proxy.ts: 24ms, application-code: 1043ms)
+  └─ ƒ updateFollowUpAction(undefined, {}) in 491ms src/lib/actions/follow-ups.ts
+ GET /login 200 in 856ms (next.js: 149ms, proxy.ts: 210ms, application-code: 496ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+ GET /dashboard 200 in 2.5s (next.js: 28ms, proxy.ts: 15ms, application-code: 2.4s)
+ POST /login 200 in 3.2s (next.js: 19ms, proxy.ts: 25ms, application-code: 3.2s)
+  └─ ƒ loginAction(undefined, {}) in 600ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.followUp.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '2124451580'
+}
+ GET /dashboard 200 in 1030ms (next.js: 75ms, proxy.ts: 18ms, application-code: 937ms)
+prisma:error 
+Invalid `prisma.leadActivity.findMany()` invocation:
+
+
+Server has closed the connection.
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1099753982'
+}
+ GET /dashboard 200 in 1093ms (next.js: 34ms, proxy.ts: 17ms, application-code: 1042ms)
+ GET /leads/ads 200 in 2.1s (next.js: 659ms, proxy.ts: 17ms, application-code: 1471ms)
+ GET /leads/ads 200 in 762ms (next.js: 62ms, proxy.ts: 22ms, application-code: 678ms)
+ GET /leads/ads 200 in 572ms (next.js: 46ms, proxy.ts: 21ms, application-code: 504ms)
+ POST /leads/ads 200 in 897ms (next.js: 49ms, proxy.ts: 20ms, application-code: 828ms)
+  └─ ƒ createLeadAction(undefined, {}) in 244ms src/lib/actions/leads.ts
+ GET /leads/ads 200 in 612ms (next.js: 20ms, proxy.ts: 80ms, application-code: 512ms)
+ GET /leads/ads 200 in 424ms (next.js: 270ms, proxy.ts: 8ms, application-code: 146ms)
+ GET /leads?q=QA%20TZ%20Lead 200 in 825ms (next.js: 162ms, proxy.ts: 12ms, application-code: 651ms)
+ GET /leads?q=zzzznomatch 200 in 297ms (next.js: 8ms, proxy.ts: 5ms, application-code: 285ms)
+ GET /leads?q=zzzznomatch 200 in 410ms (next.js: 8ms, proxy.ts: 5ms, application-code: 398ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /leads?q=QA%20TZ%20Lead 200 in 1165ms (next.js: 11ms, proxy.ts: 8ms, application-code: 1146ms)
+ GET /leads?q=QA+TZ+Lead 200 in 588ms (next.js: 10ms, proxy.ts: 7ms, application-code: 570ms)
+ GET /leads/cmuo2pxg50027o8tc3jhuzllo 200 in 1170ms (next.js: 586ms, proxy.ts: 11ms, application-code: 573ms)
+ GET /login 200 in 1799ms (next.js: 978ms, proxy.ts: 435ms, application-code: 386ms)
+ POST /login 200 in 128ms (next.js: 14ms, proxy.ts: 22ms, application-code: 92ms)
+  └─ ƒ loginAction(undefined, {}) in 14ms src/lib/actions/auth.ts
+ GET /login 200 in 834ms (next.js: 143ms, proxy.ts: 177ms, application-code: 515ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1832143346'
+}
+prisma:error 
+Invalid `prisma.followUp.count()` invocation:
+
+
+Server has closed the connection.
+ GET /dashboard 200 in 1420ms (next.js: 554ms, proxy.ts: 9ms, application-code: 857ms)
+ POST /login 200 in 3.8s (next.js: 93ms, proxy.ts: 112ms, application-code: 3.6s)
+  └─ ƒ loginAction(undefined, {}) in 1829ms src/lib/actions/auth.ts
+prisma:error 
+Invalid `prisma.followUp.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at Promise.all (<anonymous>:1:20)
+    at DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1236646131'
+}
+ GET /dashboard 200 in 1011ms (next.js: 29ms, proxy.ts: 14ms, application-code: 967ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+    at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+  66 |     overdueFollowUps,
+  67 |     totalLeadsInRange,
+> 68 |   ] = await Promise.all([
+     |       ^
+  69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+  70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+  71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getDashboardMetrics (src\lib\queries\dashboard.ts:68:7)
+        at async DashboardPage (src\app\(app)\dashboard\page.tsx:152:5)
+      66 |     overdueFollowUps,
+      67 |     totalLeadsInRange,
+    > 68 |   ] = await Promise.all([
+         |       ^
+      69 |     db.lead.count({ where: { ...inRange, outcome: null } }),
+      70 |     db.lead.count({ where: { ...inRange, pipeline: "ADS" } }),
+      71 |     db.lead.count({ where: { ...inRange, pipeline: "WARM_APPROACH" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '1236646131'
+}
+ GET /dashboard 200 in 1106ms (next.js: 33ms, proxy.ts: 37ms, application-code: 1037ms)
+prisma:error 
+Invalid `prisma.auditLog.findMany()` invocation:
+
+
+Server has closed the connection.
+ GET /leads/ads 200 in 1539ms (next.js: 473ms, proxy.ts: 41ms, application-code: 1025ms)
+ GET /leads/ads 200 in 352ms (next.js: 188ms, proxy.ts: 111ms, application-code: 52ms)
+ POST /leads/ads 200 in 1292ms (next.js: 103ms, proxy.ts: 119ms, application-code: 1070ms)
+  └─ ƒ createLeadAction(undefined, {}) in 310ms src/lib/actions/leads.ts
+ GET /leads/ads 200 in 635ms (next.js: 27ms, proxy.ts: 12ms, application-code: 596ms)
+ GET /leads/ads 200 in 529ms (next.js: 15ms, proxy.ts: 10ms, application-code: 504ms)
+ GET /leads?q=QA%20TZ%20Lead 200 in 670ms (next.js: 256ms, proxy.ts: 10ms, application-code: 404ms)
+ GET /leads?q=zzzznomatch 200 in 574ms (next.js: 17ms, proxy.ts: 16ms, application-code: 541ms)
+ GET /leads?q=zzzznomatch 200 in 450ms (next.js: 17ms, proxy.ts: 341ms, application-code: 92ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+ GET /leads?q=QA%20TZ%20Lead 200 in 1239ms (next.js: 18ms, proxy.ts: 12ms, application-code: 1209ms)
+ GET /leads/cmuo361n6002bo8tctj6fzqwx 200 in 914ms (next.js: 354ms, proxy.ts: 8ms, application-code: 552ms)
+ POST /leads/cmuo361n6002bo8tctj6fzqwx 200 in 2.3s (next.js: 29ms, proxy.ts: 23ms, application-code: 2.2s)
+  └─ ƒ updateLeadAction(undefined, {}) in 495ms src/lib/actions/leads.ts
+ GET /leads/cmuo361n6002bo8tctj6fzqwx 200 in 2.3s (next.js: 164ms, proxy.ts: 24ms, application-code: 2.1s)
+ POST /leads/cmuo361n6002bo8tctj6fzqwx 200 in 4.7s (next.js: 127ms, proxy.ts: 28ms, application-code: 4.6s)
+  └─ ƒ createFollowUpAction(undefined, {}) in 840ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 2.6s (next.js: 397ms, proxy.ts: 72ms, application-code: 2.2s)
+ POST /follow-ups?view=all 200 in 1075ms (next.js: 87ms, proxy.ts: 33ms, application-code: 955ms)
+  └─ ƒ createFollowUpAction(undefined, {}) in 784ms src/lib/actions/follow-ups.ts
+ GET /follow-ups?view=all 200 in 2.5s (next.js: 46ms, proxy.ts: 196ms, application-code: 2.2s)
+ GET /follow-ups?view=all 200 in 1868ms (next.js: 96ms, proxy.ts: 50ms, application-code: 1722ms)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getConversionReport (src\lib\queries\reports.ts:209:62)
+    at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getConversionReport (src\lib\queries\reports.ts:209:62)
+        at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+      207 |   const where = leadWhere(filters);
+      208 |
+    > 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+          |                                                              ^
+      210 |     db.lead.count({ where }),
+      211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+      212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3816174851'
+}
+ GET /reports 200 in 2.4s (next.js: 401ms, proxy.ts: 26ms, application-code: 1994ms)
+ GET /follow-ups?view=all 200 in 1607ms (next.js: 198ms, proxy.ts: 1261ms, application-code: 148ms)
+⨯ Error: The destination stream closed early.
+    at ignore-listed frames {
+  digest: '4249319543'
+}
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getConversionReport (src\lib\queries\reports.ts:209:62)
+    at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getConversionReport (src\lib\queries\reports.ts:209:62)
+        at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+      207 |   const where = leadWhere(filters);
+      208 |
+    > 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+          |                                                              ^
+      210 |     db.lead.count({ where }),
+      211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+      212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3816174851'
+}
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+ GET /reports 200 in 632ms (next.js: 44ms, proxy.ts: 32ms, application-code: 556ms)
+prisma:error 
+Invalid `prisma.followUp.groupBy()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getConversionReport (src\lib\queries\reports.ts:209:62)
+    at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getConversionReport (src\lib\queries\reports.ts:209:62)
+        at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+      207 |   const where = leadWhere(filters);
+      208 |
+    > 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+          |                                                              ^
+      210 |     db.lead.count({ where }),
+      211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+      212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3816174851'
+}
+ GET /reports 200 in 2.5s (next.js: 201ms, proxy.ts: 84ms, application-code: 2.3s)
+prisma:error 
+Invalid `prisma.lead.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getConversionReport (src\lib\queries\reports.ts:209:62)
+    at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getConversionReport (src\lib\queries\reports.ts:209:62)
+        at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+      207 |   const where = leadWhere(filters);
+      208 |
+    > 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+          |                                                              ^
+      210 |     db.lead.count({ where }),
+      211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+      212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3816174851'
+}
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+ GET /reports 200 in 982ms (next.js: 89ms, proxy.ts: 40ms, application-code: 852ms)
+prisma:error 
+Invalid `prisma.followUp.groupBy()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+prisma:error 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+⨯ Error [PrismaClientKnownRequestError]: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at async getConversionReport (src\lib\queries\reports.ts:209:62)
+    at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+  code: 'P1017',
+  meta: {
+    modelName: 'Lead',
+    driverAdapterError: Error [DriverAdapterError]: ConnectionClosed
+        at async getConversionReport (src\lib\queries\reports.ts:209:62)
+        at async ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+      207 |   const where = leadWhere(filters);
+      208 |
+    > 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+          |                                                              ^
+      210 |     db.lead.count({ where }),
+      211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+      212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), {
+      [cause]: [Object]
+    }
+  },
+  clientVersion: '7.10.0',
+  digest: '3816174851'
+}
+ GET /reports 200 in 1154ms (next.js: 112ms, proxy.ts: 34ms, application-code: 1008ms)
+prisma:error 
+Invalid `prisma.user.findMany()` invocation:
+
+
+Server has closed the connection.
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)
+[browser] PrismaClientKnownRequestError: 
+Invalid `prisma.lead.count()` invocation:
+
+
+Server has closed the connection.
+    at Promise.all (<anonymous>:1:20)
+    at getConversionReport (src\lib\queries\reports.ts:209:62)
+    at Promise.all (<anonymous>:1:20)
+    at ReportsPage (src\app\(app)\reports\page.tsx:149:7)
+  207 |   const where = leadWhere(filters);
+  208 |
+> 209 |   const [totalLeads, reachedHot, proposalsSent, won, lost] = await Promise.all([
+      |                                                              ^
+  210 |     db.lead.count({ where }),
+  211 |     db.lead.count({ where: { ...where, stage: "HOT" } }),
+  212 |     db.lead.count({ where: { ...where, stage: "PROPOSAL_SENT" } }), (src/app/(app)

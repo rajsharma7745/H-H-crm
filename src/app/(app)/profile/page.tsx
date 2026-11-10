@@ -14,7 +14,7 @@ export default async function ProfilePage() {
   const initials = `${user.firstName[0] ?? ""}${user.lastName[0] ?? ""}`.toUpperCase();
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-8">
+    <div className="mx-auto w-full max-w-3xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
       <div className="flex items-center gap-4">
         <Avatar className="size-16">
           <AvatarImage src={user.profileImageUrl ?? undefined} alt="" />

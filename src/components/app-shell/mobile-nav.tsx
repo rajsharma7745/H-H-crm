@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet";
 import { SidebarNav } from "@/components/app-shell/sidebar-nav";
 import { UserMenu } from "@/components/app-shell/user-menu";
+import { BrandMark } from "@/components/app-shell/brand-mark";
 import type { NavItemDef } from "@/lib/navigation";
 import type { ComponentProps } from "react";
 
@@ -22,23 +23,22 @@ export function MobileNav({
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger
         render={
-          <Button variant="ghost" size="icon" aria-label="Open navigation">
+          <Button variant="ghost" size="icon-lg" aria-label="Open navigation menu">
             <Menu className="size-5" />
           </Button>
         }
       />
-      <SheetContent side="left" className="w-64 p-0">
-        <SheetHeader className="h-16 justify-center border-b px-5">
-          <SheetTitle className="flex items-center gap-2.5 text-sm font-semibold tracking-tight">
-            <div className="flex size-8 items-center justify-center rounded-lg bg-neutral-950 text-xs font-bold text-white">
-              H&H
-            </div>
-            H&H CRM
+      <SheetContent side="left" className="w-[17rem] p-0">
+        <SheetHeader className="h-16 shrink-0 justify-center border-b px-5">
+          <SheetTitle className="text-left">
+            <BrandMark />
           </SheetTitle>
         </SheetHeader>
-        <div className="flex h-[calc(100%-4rem)] flex-col justify-between py-2">
-          <SidebarNav items={items} onNavigate={() => setOpen(false)} />
-          <div className="border-t p-3">
+        <div className="flex h-[calc(100%-4rem)] flex-col">
+          <div className="flex-1 overflow-y-auto py-4">
+            <SidebarNav items={items} onNavigate={() => setOpen(false)} />
+          </div>
+          <div className="shrink-0 border-t p-3">
             <UserMenu user={user} />
           </div>
         </div>

@@ -1,0 +1,483 @@
+warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'prisma/schema.prisma', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(app)/dashboard/page.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/app/(app)/layout.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/app-shell/mobile-nav.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/components/app-shell/sidebar-nav.tsx', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'src/lib/validation.ts', LF will be replaced by CRLF the next time Git touches it
+diff --git a/package.json b/package.json
+index 4aca91e..b94d1f8 100644
+--- a/package.json
++++ b/package.json
+@@ -7,6 +7,8 @@
+     "build": "next build",
+     "start": "next start",
+     "lint": "eslint",
++    "test": "vitest run",
++    "test:watch": "vitest",
+     "postinstall": "prisma generate",
+     "db:dev": "prisma dev -d",
+     "db:generate": "prisma generate",
+@@ -53,6 +55,7 @@
+     "shadcn": "^4.21.0",
+     "tailwindcss": "^4",
+     "tsx": "^4.23.13",
+-    "typescript": "^5"
++    "typescript": "^5",
++    "vitest": "^3.2.7"
+   }
+ }
+diff --git a/prisma/schema.prisma b/prisma/schema.prisma
+index 31ff0c3..1f741da 100644
+--- a/prisma/schema.prisma
++++ b/prisma/schema.prisma
+@@ -1,7 +1,8 @@
+-// H&H CRM — Phase 1 database schema
+-// Authentication, RBAC and audit foundation only.
+-// Future modules (Clients, Leads, Tasks, Time, Files, etc.) will add their own
+-// models and reference User via foreign key — do not add them here.
++// H&H CRM database schema
++// Phase 1: authentication, RBAC and audit foundation.
++// Phase 3: Client Management.
++// Future modules (Leads, Tasks, Time, Files, etc.) will add their own models
++// and reference User via foreign key — do not add them here.
+ 
+ generator client {
+   provider = "prisma-client-js"
+@@ -92,6 +93,7 @@ model User {
+   passwordResetTokens PasswordResetToken[]
+   auditLogsAsActor    AuditLog[]           @relation("AuditActor")
+   auditLogsAsTarget   AuditLog[]           @relation("AuditTarget")
++  clientsOwned        Client[]             @relation("ClientOwner")
+ 
+   @@index([roleId])
+   @@index([status])
+@@ -139,7 +141,55 @@ model PasswordResetToken {
+ }
+ 
+ // ---------------------------------------------------------------------------
+-// Audit foundation (Phase 1 scope: auth/security events only)
++// Clients (Phase 3)
++// ---------------------------------------------------------------------------
++
++/// Mirrors the B2B/B2C distinction already used for Leads (master spec
++/// Section 4), carried onto Client so a converted lead keeps its type.
++enum ClientType {
++  B2B
++  B2C
++}
++
++/// Client lifecycle per the master spec's Client entity (Section 4) — not to
++/// be confused with a Lead's pipeline stage. PROSPECT = not yet onboarded,
++/// PAUSED = temporarily inactive, CHURNED = relationship ended.
++enum ClientStatus {
++  PROSPECT
++  ACTIVE
++  PAUSED
++  CHURNED
++}
++
++model Client {
++  id                   String       @id @default(cuid())
++  name                 String
++  clientType           ClientType   @default(B2B)
++  status               ClientStatus @default(PROSPECT)
++  primaryContactName   String?
++  primaryContactEmail  String?
++  primaryContactPhone  String?
++  website              String?
++  industry             String?
++  address              String?
++  notes                String?
++  /// Account manager / owning employee. Nullable — a client can exist
++  /// unassigned — and SetNull so the client record survives if its owner's
++  /// account is ever removed.
++  ownerId              String?
++  createdAt            DateTime     @default(now())
++  updatedAt            DateTime     @updatedAt
++
++  owner User? @relation("ClientOwner", fields: [ownerId], references: [id], onDelete: SetNull)
++
++  @@index([ownerId])
++  @@index([status])
++}
++
++// ---------------------------------------------------------------------------
++// Audit foundation (Phase 1: auth/security events. Phase 3 adds Client
++// events — Client has no direct AuditLog relation since targetId is a User
++// foreign key, so client events carry clientId in metadata instead.)
+ // ---------------------------------------------------------------------------
+ 
+ enum AuditAction {
+@@ -154,6 +204,10 @@ enum AuditAction {
+   PASSWORD_CHANGED
+   PASSWORD_RESET_REQUESTED
+   PASSWORD_RESET_COMPLETED
++  CLIENT_CREATED
++  CLIENT_UPDATED
++  CLIENT_ACTIVATED
++  CLIENT_DEACTIVATED
+ }
+ 
+ model AuditLog {
+diff --git a/src/app/(app)/dashboard/page.tsx b/src/app/(app)/dashboard/page.tsx
+index 9a7f526..0ea315b 100644
+--- a/src/app/(app)/dashboard/page.tsx
++++ b/src/app/(app)/dashboard/page.tsx
+@@ -1,27 +1,104 @@
+ import type { Metadata } from "next";
+-import { requireAuth } from "@/lib/rbac/authorize";
++import Link from "next/link";
++import { ListTodo, Building2, Clock, BellRing, Inbox, UserRound, Users2 } from "lucide-react";
++import { requireAuth, userHasPermission } from "@/lib/rbac/authorize";
+ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+ import { Badge } from "@/components/ui/badge";
++import { Button } from "@/components/ui/button";
++import { EmptyState } from "@/components/empty-state";
++import { GreetingHeading } from "@/components/app-shell/greeting-heading";
+ 
+ export const metadata: Metadata = { title: "Dashboard" };
+ 
++const OVERVIEW_CARDS = [
++  { key: "tasks", label: "My Tasks", icon: ListTodo, note: "Live once Tasks ships" },
++  { key: "clients", label: "Active Clients", icon: Building2, note: "Live once Clients ships" },
++  { key: "time", label: "Time Today", icon: Clock, note: "Live once Time Tracker ships" },
++  { key: "pending", label: "Pending Items", icon: BellRing, note: "Live once Leads ships" },
++] as const;
++
+ export default async function DashboardPage() {
+   const user = await requireAuth();
+   const permissionCount = user.role.permissions.length;
++  const canViewUsers = userHasPermission(user, "users.view");
+ 
+   return (
+-    <div className="mx-auto max-w-3xl px-4 py-10 sm:px-8">
+-      <h1 className="text-2xl font-semibold tracking-tight">Welcome, {user.firstName}.</h1>
+-      <p className="mt-1.5 text-sm text-muted-foreground">
+-        Phase 1 — Application Foundation, Authentication & Permissions is live.
+-      </p>
++    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-8 sm:py-10">
++      <div>
++        <GreetingHeading firstName={user.firstName} />
++        <p className="mt-1.5 text-sm text-muted-foreground">Here&apos;s what&apos;s happening across H&amp;H CRM.</p>
++      </div>
++
++      <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
++        {OVERVIEW_CARDS.map((card) => (
++          <Card key={card.key}>
++            <CardHeader className="flex-row items-center justify-between gap-2 space-y-0">
++              <CardTitle className="text-sm font-medium text-muted-foreground">{card.label}</CardTitle>
++              <card.icon className="size-4 text-muted-foreground" />
++            </CardHeader>
++            <CardContent>
++              <p className="text-2xl font-semibold tracking-tight text-muted-foreground/40">—</p>
++              <p className="mt-1 text-xs text-muted-foreground">{card.note}</p>
++            </CardContent>
++          </Card>
++        ))}
++      </div>
++
++      <div className="mt-4 grid gap-4 lg:grid-cols-3">
++        <Card className="lg:col-span-2">
++          <CardHeader>
++            <CardTitle className="text-base">Recent activity</CardTitle>
++            <CardDescription>What&apos;s happened recently across your work.</CardDescription>
++          </CardHeader>
++          <CardContent>
++            <EmptyState
++              icon={Inbox}
++              title="No activity yet"
++              description="Activity from clients, leads, tasks and time entries will show up here once those modules are live."
++            />
++          </CardContent>
++        </Card>
++
++        <Card>
++          <CardHeader>
++            <CardTitle className="text-base">Quick actions</CardTitle>
++            <CardDescription>Things you can do right now.</CardDescription>
++          </CardHeader>
++          <CardContent className="flex flex-col gap-2">
++            <Button
++              variant="outline"
++              className="justify-start"
++              nativeButton={false}
++              render={
++                <Link href="/profile">
++                  <UserRound className="size-4" />
++                  Edit your profile
++                </Link>
++              }
++            />
++            {canViewUsers && (
++              <Button
++                variant="outline"
++                className="justify-start"
++                nativeButton={false}
++                render={
++                  <Link href="/admin/users">
++                    <Users2 className="size-4" />
++                    Manage users
++                  </Link>
++                }
++              />
++            )}
++          </CardContent>
++        </Card>
++      </div>
+ 
+-      <Card className="mt-8">
++      <Card className="mt-4">
+         <CardHeader>
+           <CardTitle className="text-base">Your account</CardTitle>
+           <CardDescription>
+-            This is a foundation dashboard. Clients, leads, tasks, time tracking and reporting
+-            ship in later phases and will appear here as they&apos;re built.
++            This is a foundation dashboard. Clients, leads, tasks, time tracking and reporting ship in later phases
++            and will appear here as they&apos;re built.
+           </CardDescription>
+         </CardHeader>
+         <CardContent className="grid gap-3 text-sm sm:grid-cols-2">
+diff --git a/src/app/(app)/layout.tsx b/src/app/(app)/layout.tsx
+index 5ea4dbb..ba71b1f 100644
+--- a/src/app/(app)/layout.tsx
++++ b/src/app/(app)/layout.tsx
+@@ -1,15 +1,16 @@
+-import { requireAuth, userHasPermission } from "@/lib/rbac/authorize";
+-import { SidebarNav, type NavItem } from "@/components/app-shell/sidebar-nav";
++import { requireAuth } from "@/lib/rbac/authorize";
++import { visibleNavItems } from "@/lib/navigation";
++import type { PermissionKey } from "@/lib/rbac/permissions";
++import { SidebarNav } from "@/components/app-shell/sidebar-nav";
+ import { UserMenu } from "@/components/app-shell/user-menu";
+ import { MobileNav } from "@/components/app-shell/mobile-nav";
++import { Breadcrumbs } from "@/components/app-shell/breadcrumbs";
++import { NotificationsButton } from "@/components/app-shell/notifications-button";
+ 
+ export default async function AppLayout({ children }: { children: React.ReactNode }) {
+   const user = await requireAuth();
+-
+-  const items: NavItem[] = [{ href: "/dashboard", label: "Dashboard", icon: "dashboard" }];
+-  if (userHasPermission(user, "users.view")) {
+-    items.push({ href: "/admin/users", label: "Users", icon: "users" });
+-  }
++  const granted = new Set(user.role.permissions.map((rp) => rp.permission.key as PermissionKey));
++  const items = visibleNavItems(granted);
+ 
+   return (
+     <div className="flex min-h-svh">
+@@ -21,7 +22,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
+           <span className="text-sm font-semibold tracking-tight">H&H CRM</span>
+         </div>
+ 
+-        <div className="flex-1 py-2">
++        <div className="flex-1 overflow-y-auto py-2">
+           <SidebarNav items={items} />
+         </div>
+ 
+@@ -31,14 +32,23 @@ export default async function AppLayout({ children }: { children: React.ReactNod
+       </aside>
+ 
+       <div className="flex min-w-0 flex-1 flex-col">
+-        <header className="flex h-16 items-center justify-between border-b px-4 md:hidden">
+-          <div className="flex items-center gap-2.5">
+-            <div className="flex size-8 items-center justify-center rounded-lg bg-neutral-950 text-xs font-bold text-white">
++        <header className="flex h-16 shrink-0 items-center justify-between gap-3 border-b px-4 sm:px-6">
++          <div className="flex min-w-0 items-center gap-2.5">
++            <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-neutral-950 text-xs font-bold text-white md:hidden">
+               H&H
+             </div>
+-            <span className="text-sm font-semibold tracking-tight">H&H CRM</span>
++            <span className="truncate text-sm font-semibold tracking-tight md:hidden">H&H CRM</span>
++            <div className="hidden min-w-0 md:block">
++              <Breadcrumbs items={items} />
++            </div>
++          </div>
++
++          <div className="flex shrink-0 items-center gap-1.5">
++            <NotificationsButton />
++            <div className="md:hidden">
++              <MobileNav items={items} user={user} />
++            </div>
+           </div>
+-          <MobileNav items={items} user={user} />
+         </header>
+ 
+         <main className="flex-1 overflow-y-auto">{children}</main>
+diff --git a/src/components/app-shell/mobile-nav.tsx b/src/components/app-shell/mobile-nav.tsx
+index 47832cf..d69cb47 100644
+--- a/src/components/app-shell/mobile-nav.tsx
++++ b/src/components/app-shell/mobile-nav.tsx
+@@ -4,15 +4,16 @@ import { useState } from "react";
+ import { Menu } from "lucide-react";
+ import { Button } from "@/components/ui/button";
+ import { Sheet, SheetContent, SheetTrigger, SheetTitle, SheetHeader } from "@/components/ui/sheet";
+-import { SidebarNav, type NavItem } from "@/components/app-shell/sidebar-nav";
++import { SidebarNav } from "@/components/app-shell/sidebar-nav";
+ import { UserMenu } from "@/components/app-shell/user-menu";
++import type { NavItemDef } from "@/lib/navigation";
+ import type { ComponentProps } from "react";
+ 
+ export function MobileNav({
+   items,
+   user,
+ }: {
+-  items: NavItem[];
++  items: NavItemDef[];
+   user: ComponentProps<typeof UserMenu>["user"];
+ }) {
+   const [open, setOpen] = useState(false);
+@@ -36,9 +37,7 @@ export function MobileNav({
+           </SheetTitle>
+         </SheetHeader>
+         <div className="flex h-[calc(100%-4rem)] flex-col justify-between py-2">
+-          <div onClick={() => setOpen(false)}>
+-            <SidebarNav items={items} />
+-          </div>
++          <SidebarNav items={items} onNavigate={() => setOpen(false)} />
+           <div className="border-t p-3">
+             <UserMenu user={user} />
+           </div>
+diff --git a/src/components/app-shell/sidebar-nav.tsx b/src/components/app-shell/sidebar-nav.tsx
+index d4d6ae4..52b5fd8 100644
+--- a/src/components/app-shell/sidebar-nav.tsx
++++ b/src/components/app-shell/sidebar-nav.tsx
+@@ -2,25 +2,67 @@
+ 
+ import Link from "next/link";
+ import { usePathname } from "next/navigation";
+-import { LayoutDashboard, Users2 } from "lucide-react";
++import {
++  LayoutDashboard,
++  Building2,
++  Target,
++  ListChecks,
++  CalendarDays,
++  Clock,
++  UsersRound,
++  BarChart3,
++  Users2,
++  Settings as SettingsIcon,
++  type LucideIcon,
++} from "lucide-react";
+ import { cn } from "@/lib/utils";
++import { Badge } from "@/components/ui/badge";
++import type { NavIconKey, NavItemDef } from "@/lib/navigation";
+ 
+-export type NavItem = { href: string; label: string; icon: "dashboard" | "users" };
++const ICONS: Record<NavIconKey, LucideIcon> = {
++  dashboard: LayoutDashboard,
++  clients: Building2,
++  leads: Target,
++  tasks: ListChecks,
++  calendar: CalendarDays,
++  time: Clock,
++  employees: UsersRound,
++  reports: BarChart3,
++  users: Users2,
++  settings: SettingsIcon,
++};
+ 
+-const ICONS = { dashboard: LayoutDashboard, users: Users2 } as const;
+-
+-export function SidebarNav({ items }: { items: NavItem[] }) {
++export function SidebarNav({ items, onNavigate }: { items: NavItemDef[]; onNavigate?: () => void }) {
+   const pathname = usePathname();
+ 
+   return (
+     <nav className="grid gap-1 px-3">
+       {items.map((item) => {
+         const Icon = ICONS[item.icon];
++
++        if (item.status === "soon") {
++          return (
++            <div
++              key={item.key}
++              aria-disabled="true"
++              title={`${item.label} — coming soon`}
++              className="flex cursor-not-allowed items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground/60"
++            >
++              <Icon className="size-4" />
++              <span className="flex-1 truncate">{item.label}</span>
++              <Badge variant="outline" className="shrink-0 text-[10px] font-normal text-muted-foreground/70">
++                Soon
++              </Badge>
++            </div>
++          );
++        }
++
+         const active = pathname === item.href || pathname.startsWith(`${item.href}/`);
+         return (
+           <Link
+-            key={item.href}
++            key={item.key}
+             href={item.href}
++            onClick={onNavigate}
+             className={cn(
+               "flex items-center gap-2.5 rounded-md px-3 py-2 text-sm font-medium transition-colors",
+               active
+diff --git a/src/lib/validation.ts b/src/lib/validation.ts
+index 06a667f..00b0af5 100644
+--- a/src/lib/validation.ts
++++ b/src/lib/validation.ts
+@@ -66,3 +66,60 @@ export const updateUserSchema = z.object({
+   jobTitle: z.string().trim().max(150).optional().or(z.literal("")),
+   phone: z.string().trim().max(30).optional().or(z.literal("")),
+ });
++
++// ---------------------------------------------------------------------------
++// Clients (Phase 3)
++// ---------------------------------------------------------------------------
++
++const optionalPhoneSchema = z
++  .string()
++  .trim()
++  .max(30)
++  .optional()
++  .or(z.literal(""))
++  .refine((v) => !v || /^[0-9+\-()\s]{7,30}$/.test(v), {
++    message: "Enter a valid phone number.",
++  });
++
++const optionalEmailSchema = z.union([z.literal(""), emailSchema]).optional();
++
++const optionalWebsiteSchema = z
++  .string()
++  .trim()
++  .max(2048)
++  .optional()
++  .or(z.literal(""))
++  .refine((v) => !v || /^https?:\/\/[^\s]+\.[^\s]+$/i.test(v), {
++    message: "Enter a valid website URL, starting with http:// or https://.",
++  });
++
++/** Sentinel value the client form's owner <Select> submits for "no owner
++ * selected" — Base UI Select items can't carry an empty-string value, so the
++ * server action normalizes this back to `null` before writing to the DB. */
++export const UNASSIGNED_OWNER = "__unassigned__";
++
++const clientTypeSchema = z.enum(["B2B", "B2C"], { message: "Select a client type." });
++const clientStatusSchema = z.enum(["PROSPECT", "ACTIVE", "PAUSED", "CHURNED"], {
++  message: "Select a status.",
++});
++
++const clientBaseFields = {
++  name: z.string().trim().min(1, "Client name is required.").max(200),
++  clientType: clientTypeSchema,
++  status: clientStatusSchema,
++  primaryContactName: z.string().trim().max(150).optional().or(z.literal("")),
++  primaryContactEmail: optionalEmailSchema,
++  primaryContactPhone: optionalPhoneSchema,
++  website: optionalWebsiteSchema,
++  industry: z.string().trim().max(100).optional().or(z.literal("")),
++  address: z.string().trim().max(300).optional().or(z.literal("")),
++  notes: z.string().trim().max(5000).optional().or(z.literal("")),
++  ownerId: z.string().trim().optional().or(z.literal("")),
++};
++
++export const createClientSchema = z.object(clientBaseFields);
++
++export const updateClientSchema = z.object({
++  clientId: z.string().min(1),
++  ...clientBaseFields,
++});

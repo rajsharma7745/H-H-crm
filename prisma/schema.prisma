@@ -94,6 +94,11 @@ model User {
   auditLogsAsActor    AuditLog[]           @relation("AuditActor")
   auditLogsAsTarget   AuditLog[]           @relation("AuditTarget")
   clientsOwned        Client[]             @relation("ClientOwner")
+  leadsAssigned       Lead[]               @relation("LeadAssignedRep")
+  leadsCreated        Lead[]               @relation("LeadCreatedBy")
+  followUpsAssigned   FollowUp[]           @relation("FollowUpAssignedRep")
+  followUpsCreated    FollowUp[]           @relation("FollowUpCreatedBy")
+  leadActivities      LeadActivity[]       @relation("LeadActivityCreatedBy")
 
   @@index([roleId])
   @@index([status])
@@ -208,6 +213,17 @@ enum AuditAction {
   CLIENT_UPDATED
   CLIENT_ACTIVATED
   CLIENT_DEACTIVATED
+  LEAD_CREATED
+  LEAD_UPDATED
+  LEAD_STAGE_CHANGED
+  LEAD_ASSIGNED
+  LEAD_DELETED
+  FOLLOWUP_CREATED
+  FOLLOWUP_UPDATED
+  FOLLOWUP_COMPLETED
+  FOLLOWUP_CANCELLED
+  LEAD_ACTIVITY_CREATED
+  LEAD_ACTIVITY_UPDATED
 }
 
 model AuditLog {
@@ -231,4 +247,190 @@ model AuditLog {
   @@index([targetId])
   @@index([action])
   @@index([createdAt])
+}
+
+// ---------------------------------------------------------------------------
+// Leads (Phase 1 of the Lead Management System scope change — H&H CRM's
+// original Client/Task/Time/Files modules are frozen; Leads is the active
+// build). One unified model with a pipeline discriminator rather than two
+// separate tables, so "All Leads" can list both pipelines without a union
+// query. Pipeline-specific fields are nullable and only meaningful for their
+// own pipeline; which LeadStage values are valid for which pipeline is
+// enforced in the Zod validation layer (src/lib/validation.ts), not by the
+// database — Postgres has no clean way to scope one enum column to a
+// caller-chosen subset of its own values.
+// ---------------------------------------------------------------------------
+
+enum LeadPipeline {
+  ADS
+  WARM_APPROACH
+}
+
+enum LeadStage {
+  // Ads pipeline
+  COLD
+  WARM
+  HOT
+  // Warm Approach pipeline
+  PLAN_MEET
+  PITCHED
+  PROPOSAL_SENT
+}
+
+/// Warm Approach's "win/loss status". Null means undecided — there is no
+/// explicit OPEN value because "not yet won or lost" is just the absence of
+/// an outcome, not a state a caller ever sets.
+enum LeadOutcome {
+  WON
+  LOST
+}
+
+model Lead {
+  id          String       @id @default(cuid())
+  name        String
+  companyName String?
+  email       String?
+  phone       String?
+  pipeline    LeadPipeline
+  stage       LeadStage
+  source      String?
+  notes       String?
+
+  /// Owning sales rep. Nullable/SetNull, mirrors Client.owner — a lead
+  /// survives if the user assigned to it is later removed.
+  assignedRepId String?
+  /// Who created the lead. Same nullability rationale as assignedRepId.
+  createdById   String?
+
+  // -- Ads pipeline fields (meaningful when pipeline = ADS) -----------------
+  campaignName         String?
+  adCreative           String?
+  submittedAt          DateTime?
+  initialContactStatus String?
+  interestLevel        String?
+  qualificationNotes   String?
+  lastContactedAt      DateTime?
+  immediateRequirement String?
+  /// Percentage, 0-100. Bounds enforced in Zod, not the database.
+  closingProbability   Int?
+  meetingScheduled     Boolean   @default(false)
+
+  // -- Warm Approach pipeline fields (meaningful when pipeline = WARM_APPROACH) --
+  lastInteractionAt  DateTime?
+  scheduledMeetingAt DateTime?
+  followUpNotes      String?
+  pitchedAt          DateTime?
+  serviceDiscussed   String?
+  feedback           String?
+  nextAction         String?
+  proposalAmount     Decimal?     @db.Decimal(12, 2)
+  proposalDocUrl     String?
+  proposalSentAt     DateTime?
+  expectedCloseAt    DateTime?
+  outcome            LeadOutcome?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  assignedRep User? @relation("LeadAssignedRep", fields: [assignedRepId], references: [id], onDelete: SetNull)
+  createdBy   User? @relation("LeadCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  followUps  FollowUp[]
+  activities LeadActivity[]
+
+  @@index([pipeline])
+  @@index([stage])
+  @@index([assignedRepId])
+  @@index([source])
+}
+
+// ---------------------------------------------------------------------------
+// Follow-ups (Phase 4). Lead-scoped tasks: "call Jordan back Thursday".
+// ---------------------------------------------------------------------------
+
+enum FollowUpType {
+  CALL
+  EMAIL
+  MEETING
+  MESSAGE
+  OTHER
+}
+
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+enum FollowUpPriority {
+  LOW
+  MEDIUM
+  HIGH
+}
+
+model FollowUp {
+  id          String           @id @default(cuid())
+  leadId      String
+  title       String
+  description String?
+  type        FollowUpType     @default(CALL)
+  dueAt       DateTime
+  status      FollowUpStatus   @default(PENDING)
+  priority    FollowUpPriority @default(MEDIUM)
+  /// Who owes this follow-up. Nullable/SetNull like every other user
+  /// reference, so a follow-up survives its assignee being removed.
+  assignedRepId String?
+  completedAt   DateTime?
+  createdById   String?
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  /// Cascade — unlike the SetNull used for *user* references, a follow-up is
+  /// an owned child of its lead and is meaningless without it. Deleting a
+  /// lead (which is a real delete, not a soft one) takes its follow-ups too.
+  lead        Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  assignedRep User? @relation("FollowUpAssignedRep", fields: [assignedRepId], references: [id], onDelete: SetNull)
+  createdBy   User? @relation("FollowUpCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@index([status])
+  @@index([dueAt])
+  @@index([assignedRepId])
+}
+
+// ---------------------------------------------------------------------------
+// Lead activities (Phase 5). The *business* communication history — what was
+// said, when, by whom. Deliberately separate from AuditLog, which remains the
+// security/audit trail: this table is user-authored content the team reads and
+// edits, AuditLog is an append-only record of privileged actions.
+// ---------------------------------------------------------------------------
+
+enum LeadActivityType {
+  NOTE
+  CALL
+  MEETING
+  EMAIL
+  OTHER
+}
+
+model LeadActivity {
+  id          String           @id @default(cuid())
+  leadId      String
+  type        LeadActivityType @default(NOTE)
+  title       String
+  description String?
+  /// When the call/meeting/email actually happened, which is not necessarily
+  /// when the row was created (createdAt covers that).
+  activityAt  DateTime
+  createdById String?
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+
+  /// Cascade for the same reason as FollowUp.lead — an activity is an owned
+  /// child of its lead, meaningless once the lead is gone.
+  lead      Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  createdBy User? @relation("LeadActivityCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@index([activityAt])
 }

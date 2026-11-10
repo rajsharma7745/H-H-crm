@@ -7,9 +7,9 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
+  --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-geist-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -27,6 +27,15 @@
   --color-input: var(--input);
   --color-border: var(--border);
   --color-destructive: var(--destructive);
+  --color-success: var(--success);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
+  --color-stage-cold: var(--stage-cold);
+  --color-stage-warm: var(--stage-warm);
+  --color-stage-hot: var(--stage-hot);
+  --color-stage-plan-meet: var(--stage-plan-meet);
+  --color-stage-pitched: var(--stage-pitched);
+  --color-stage-proposal-sent: var(--stage-proposal-sent);
   --color-accent-foreground: var(--accent-foreground);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
@@ -48,73 +57,115 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/*
+ * Colour system
+ * -------------
+ * Surfaces are layered rather than flat: `--background` is the app canvas (a
+ * barely-tinted neutral), while `--card`, `--popover` and `--sidebar` stay
+ * pure white so panels read as raised surfaces against it. That one change
+ * does most of the work of making the app look like a product rather than a
+ * document.
+ *
+ * `--primary` is the H&H brand indigo. It is reserved for primary actions and
+ * active navigation — never for status. Status has its own semantic ramp
+ * (`--success` / `--warning` / `--info` / `--destructive`), and the six
+ * pipeline stages have dedicated hues so Cold → Warm → Hot and
+ * Plan Meet → Pitched → Proposal Sent read as progressions at a glance.
+ *
+ * Every status colour is dark enough (L ≈ 0.45–0.55 in light mode) to be used
+ * as foreground text on its own 10–15% tint and still clear WCAG AA.
+ */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  --background: oklch(0.977 0.003 255);
+  --foreground: oklch(0.16 0.012 265);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.16 0.012 265);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
+  --popover-foreground: oklch(0.16 0.012 265);
+  --primary: oklch(0.524 0.183 264);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.965 0.005 255);
+  --secondary-foreground: oklch(0.26 0.015 265);
+  --muted: oklch(0.965 0.005 255);
+  --muted-foreground: oklch(0.505 0.015 265);
+  --accent: oklch(0.955 0.012 264);
+  --accent-foreground: oklch(0.3 0.09 264);
+  --destructive: oklch(0.525 0.198 27);
+  --success: oklch(0.49 0.118 156);
+  --warning: oklch(0.53 0.124 70);
+  --info: oklch(0.505 0.135 240);
+  --border: oklch(0.915 0.006 255);
+  --input: oklch(0.905 0.006 255);
+  --ring: oklch(0.524 0.183 264);
+
+  /* Ads pipeline: a temperature ramp. */
+  --stage-cold: oklch(0.505 0.105 235);
+  --stage-warm: oklch(0.53 0.124 70);
+  --stage-hot: oklch(0.545 0.185 30);
+  /* Warm Approach pipeline: a progression ramp. */
+  --stage-plan-meet: oklch(0.52 0.15 292);
+  --stage-pitched: oklch(0.505 0.135 240);
+  --stage-proposal-sent: oklch(0.49 0.118 156);
+
+  --chart-1: oklch(0.524 0.183 264);
+  --chart-2: oklch(0.505 0.135 240);
+  --chart-3: oklch(0.52 0.15 292);
+  --chart-4: oklch(0.53 0.124 70);
+  --chart-5: oklch(0.49 0.118 156);
   --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar: oklch(1 0 0);
+  --sidebar-foreground: oklch(0.16 0.012 265);
+  --sidebar-primary: oklch(0.524 0.183 264);
+  --sidebar-primary-foreground: oklch(0.99 0 0);
+  --sidebar-accent: oklch(0.955 0.012 264);
+  --sidebar-accent-foreground: oklch(0.3 0.09 264);
+  --sidebar-border: oklch(0.915 0.006 255);
+  --sidebar-ring: oklch(0.524 0.183 264);
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: oklch(0.155 0.012 265);
+  --foreground: oklch(0.975 0.002 255);
+  --card: oklch(0.205 0.014 265);
+  --card-foreground: oklch(0.975 0.002 255);
+  --popover: oklch(0.205 0.014 265);
+  --popover-foreground: oklch(0.975 0.002 255);
+  --primary: oklch(0.68 0.16 264);
+  --primary-foreground: oklch(0.16 0.04 264);
+  --secondary: oklch(0.27 0.015 265);
+  --secondary-foreground: oklch(0.975 0.002 255);
+  --muted: oklch(0.27 0.015 265);
+  --muted-foreground: oklch(0.715 0.015 265);
+  --accent: oklch(0.3 0.04 264);
+  --accent-foreground: oklch(0.92 0.04 264);
+  --destructive: oklch(0.71 0.176 24);
+  --success: oklch(0.72 0.145 158);
+  --warning: oklch(0.79 0.14 78);
+  --info: oklch(0.72 0.13 238);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 16%);
+  --ring: oklch(0.68 0.16 264);
+
+  --stage-cold: oklch(0.72 0.11 235);
+  --stage-warm: oklch(0.79 0.14 78);
+  --stage-hot: oklch(0.72 0.16 32);
+  --stage-plan-meet: oklch(0.74 0.14 292);
+  --stage-pitched: oklch(0.72 0.13 238);
+  --stage-proposal-sent: oklch(0.72 0.145 158);
+
+  --chart-1: oklch(0.68 0.16 264);
+  --chart-2: oklch(0.72 0.13 238);
+  --chart-3: oklch(0.74 0.14 292);
+  --chart-4: oklch(0.79 0.14 78);
+  --chart-5: oklch(0.72 0.145 158);
+  --sidebar: oklch(0.185 0.013 265);
+  --sidebar-foreground: oklch(0.975 0.002 255);
+  --sidebar-primary: oklch(0.68 0.16 264);
+  --sidebar-primary-foreground: oklch(0.16 0.04 264);
+  --sidebar-accent: oklch(0.3 0.04 264);
+  --sidebar-accent-foreground: oklch(0.92 0.04 264);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.68 0.16 264);
 }
 
 @layer base {
@@ -126,5 +177,34 @@
   }
   html {
     @apply font-sans;
+  }
+
+  /*
+   * Keyboard focus was previously left entirely to each component's own
+   * focus-visible ring, which meant plain links — lead names, breadcrumbs,
+   * nav items, "see all" links — had no visible focus at all.
+   *
+   * This is the floor for those. It deliberately excludes
+   * `[data-slot="button"]` (the Button primitive) and the form primitives,
+   * which already draw their own ring; applying both would paint two
+   * concentric rings on every button.
+   */
+  a:focus-visible,
+  summary:focus-visible,
+  button:not([data-slot="button"]):focus-visible,
+  [tabindex]:not([data-slot="button"]):focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  /*
+   * Tabular figures for metrics and table numbers, so digits line up
+   * column-to-column and a KPI doesn't visibly reflow as its value changes.
+   */
+  .tabular-metric {
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.015em;
   }
 }

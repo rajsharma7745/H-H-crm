@@ -19,9 +19,9 @@ describe("isNavItemVisible", () => {
   });
 
   it("requires the granted set to contain the item's permission", () => {
-    const item = NAV_ITEMS.find((i) => i.key === "clients")!;
+    const item = NAV_ITEMS.find((i) => i.key === "reports")!;
     expect(isNavItemVisible(item, new Set())).toBe(false);
-    expect(isNavItemVisible(item, new Set(["clients.view"]))).toBe(true);
+    expect(isNavItemVisible(item, new Set(["reports.view"]))).toBe(true);
   });
 });
 
@@ -45,16 +45,29 @@ describe("visibleNavItems", () => {
     }
   });
 
-  it("hides Users and Employees from roles without users.view", () => {
+  it("hides Team from roles without users.view", () => {
     const items = visibleNavItems(grantedFor("EMPLOYEE"));
-    expect(items.some((i) => i.key === "users")).toBe(false);
-    expect(items.some((i) => i.key === "employees")).toBe(false);
+    expect(items.some((i) => i.key === "team")).toBe(false);
   });
 
-  it("shows Users and Employees to MANAGER (has users.view)", () => {
+  it("shows Team to MANAGER (has users.view)", () => {
     const items = visibleNavItems(grantedFor("MANAGER"));
-    expect(items.some((i) => i.key === "users")).toBe(true);
-    expect(items.some((i) => i.key === "employees")).toBe(true);
+    expect(items.some((i) => i.key === "team")).toBe(true);
+  });
+
+  it("hides Clients from every role — the module is intentionally out of primary nav", () => {
+    for (const role of ["SUPER_ADMIN", "MANAGER", "EMPLOYEE", "INTERN"] as RoleKey[]) {
+      const items = visibleNavItems(grantedFor(role));
+      expect(items.some((i) => i.key === "clients")).toBe(false);
+    }
+  });
+
+  it("shows the Ads and Warm Approach pipeline nav items to every role (all have leads.view)", () => {
+    for (const role of ["SUPER_ADMIN", "MANAGER", "EMPLOYEE", "INTERN"] as RoleKey[]) {
+      const items = visibleNavItems(grantedFor(role));
+      expect(items.some((i) => i.key === "ads-pipeline")).toBe(true);
+      expect(items.some((i) => i.key === "warm-approach-pipeline")).toBe(true);
+    }
   });
 
   it("every 'soon' item is inert: it never carries an href", () => {
@@ -64,6 +77,13 @@ describe("visibleNavItems", () => {
       }
     }
   });
+
+  it("every nav item now points at a real route — no 'coming soon' placeholders left", () => {
+    expect(NAV_ITEMS.filter((item) => item.status === "soon")).toEqual([]);
+    for (const item of NAV_ITEMS) {
+      expect((item as { href?: string }).href).toMatch(/^\//);
+    }
+  });
 });
 
 describe("buildBreadcrumbs", () => {
@@ -71,16 +91,16 @@ describe("buildBreadcrumbs", () => {
 
   it("matches the exact href of an active nav item", () => {
     expect(buildBreadcrumbs("/dashboard", items)).toEqual([{ label: "Dashboard", href: "/dashboard" }]);
-    expect(buildBreadcrumbs("/admin/users", items)).toEqual([{ label: "Users", href: "/admin/users" }]);
+    expect(buildBreadcrumbs("/admin/users", items)).toEqual([{ label: "Team", href: "/admin/users" }]);
   });
 
   it("matches nested paths under an active item's href", () => {
-    expect(buildBreadcrumbs("/admin/users/123", items)).toEqual([{ label: "Users", href: "/admin/users" }]);
+    expect(buildBreadcrumbs("/admin/users/123", items)).toEqual([{ label: "Team", href: "/admin/users" }]);
   });
 
-  it("matches the Clients detail route to the Clients crumb", () => {
-    expect(buildBreadcrumbs("/clients", items)).toEqual([{ label: "Clients", href: "/clients" }]);
-    expect(buildBreadcrumbs("/clients/abc123", items)).toEqual([{ label: "Clients", href: "/clients" }]);
+  it("falls back to the extra-page map for Clients, which is intact but hidden from nav", () => {
+    expect(buildBreadcrumbs("/clients", items)).toEqual([{ label: "Clients" }]);
+    expect(buildBreadcrumbs("/clients/abc123", items)).toEqual([{ label: "Clients" }]);
   });
 
   it("falls back to the extra-page map for pages outside the nav (e.g. profile)", () => {
@@ -96,9 +116,38 @@ describe("buildBreadcrumbs", () => {
   });
 
   it("never matches a 'soon' item, since it has no href to match against", () => {
-    const leadsLikePath = "/leads";
-    const result = buildBreadcrumbs(leadsLikePath, items);
-    expect(result).not.toEqual([{ label: "Leads" }]);
+    // Uses a synthetic item rather than a real nav entry: every shipped item
+    // is now "active", and this rule still has to hold for future ones.
+    const soonItems: NavItemDef[] = [
+      {
+        key: "future",
+        label: "Future Module",
+        hint: "A module that has not shipped yet",
+        icon: "reports",
+        group: "manage",
+        status: "soon",
+        permission: "reports.view",
+      },
+    ];
+    expect(buildBreadcrumbs("/future", soonItems)).toEqual([{ label: "Dashboard", href: "/dashboard" }]);
+  });
+
+  it("matches the remaining top-level routes to their own crumbs", () => {
+    expect(buildBreadcrumbs("/follow-ups", items)).toEqual([{ label: "Follow-ups", href: "/follow-ups" }]);
+    expect(buildBreadcrumbs("/reports", items)).toEqual([{ label: "Reports", href: "/reports" }]);
+    expect(buildBreadcrumbs("/settings", items)).toEqual([{ label: "Settings", href: "/settings" }]);
+  });
+
+  it("matches the All Leads detail route to the All Leads crumb, now that /leads is a real page", () => {
+    expect(buildBreadcrumbs("/leads", items)).toEqual([{ label: "All Leads", href: "/leads" }]);
+    expect(buildBreadcrumbs("/leads/abc123", items)).toEqual([{ label: "All Leads", href: "/leads" }]);
+  });
+
+  it("prefers the longer, more specific pipeline href over the shorter /leads href", () => {
+    expect(buildBreadcrumbs("/leads/ads", items)).toEqual([{ label: "Ads Pipeline", href: "/leads/ads" }]);
+    expect(buildBreadcrumbs("/leads/warm-approach", items)).toEqual([
+      { label: "Warm Approach Pipeline", href: "/leads/warm-approach" },
+    ]);
   });
 });
 

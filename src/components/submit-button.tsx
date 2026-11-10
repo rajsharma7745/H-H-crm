@@ -8,9 +8,13 @@ import type { ComponentProps } from "react";
 export function SubmitButton({
   children,
   pendingText,
+  pending: pendingProp,
   ...props
-}: ComponentProps<typeof Button> & { pendingText?: string }) {
-  const { pending } = useFormStatus();
+}: ComponentProps<typeof Button> & { pendingText?: string; pending?: boolean }) {
+  const status = useFormStatus();
+  // Forms that submit via onSubmit (to keep entered values on error) are not
+  // "form actions", so useFormStatus never reports them pending — they pass it.
+  const pending = pendingProp ?? status.pending;
 
   return (
     <Button type="submit" disabled={pending} {...props}>

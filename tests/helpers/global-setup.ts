@@ -31,7 +31,10 @@ export default async function setup(project: TestProject) {
     db: pglite,
     port: 0, // OS-assigned free port
     host: "127.0.0.1",
-    maxConnections: 10,
+    // Headroom for one pool per test file. Each file's pool is closed by the
+    // afterAll hook in tests/helpers/setup-env.ts, but workers can overlap
+    // briefly at file boundaries, so this sits well above the file count.
+    maxConnections: 50,
   });
   await socketServer.start();
 

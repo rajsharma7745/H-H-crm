@@ -13,7 +13,16 @@ import { NextResponse, type NextRequest } from "next/server";
 
 const SESSION_COOKIE_NAME = process.env.SESSION_COOKIE_NAME || "hhcrm_session";
 
-const PROTECTED_PREFIXES = ["/dashboard", "/profile", "/admin", "/settings"];
+const PROTECTED_PREFIXES = [
+  "/dashboard",
+  "/profile",
+  "/admin",
+  "/settings",
+  "/leads",
+  "/follow-ups",
+  "/reports",
+  "/clients",
+];
 
 // Note: there is deliberately no "already logged in -> bounce away from
 // /login" rule here. That direction needs a real DB-backed session check

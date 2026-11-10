@@ -1,4 +1,5 @@
 import type { Prisma, ClientStatus } from "@prisma/client";
+import { escapeLikeWildcards } from "@/lib/queries/search";
 
 /**
  * Pure filter-building logic for the client list, split out from the page
@@ -11,14 +12,6 @@ const VALID_CLIENT_STATUSES: readonly ClientStatus[] = ["PROSPECT", "ACTIVE", "P
 
 export function parseClientStatusFilter(status: string | undefined): ClientStatus | undefined {
   return VALID_CLIENT_STATUSES.includes(status as ClientStatus) ? (status as ClientStatus) : undefined;
-}
-
-/** Prisma's `contains` compiles to a Postgres ILIKE, which treats `%`/`_` as
- * wildcards — escape them (Postgres's default LIKE escape char is `\`) so a
- * literal search term like "50%_off" matches literally instead of behaving
- * as a wildcard pattern. */
-function escapeLikeWildcards(value: string): string {
-  return value.replace(/[\\%_]/g, (ch) => `\\${ch}`);
 }
 
 export function buildClientWhere(params: {
